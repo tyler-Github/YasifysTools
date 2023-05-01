@@ -21,7 +21,7 @@ docker buildx build --platform linux/amd64,linux/arm64 --tag yasifystools .
 Run the following command to run the docker image:
 
 ```bash
-docker pull insidiousfiddler/yasifystools && docker run -it --rm insidiousfiddler/yasifystools
+docker pull insidiousfiddler/yasifystools && docker run -it --rm -p 0:3000 insidiousfiddler/yasifystools
 ```
 
 ## Usage
