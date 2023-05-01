@@ -1,7 +1,7 @@
 {
   "name": "nodejs",
   "version": "0.8.2",
-  "description": "",
+  "description": "A website with tools to download videos from popular social media platforms.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
