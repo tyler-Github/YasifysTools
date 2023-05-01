@@ -58,6 +58,18 @@ io.on('connection', function(socket) {
       });
       video.on('end', () => {
         socket.emit('download-complete', { filename, thumbnail, title, FinishedName });
+
+        // Delete the file after 5 minutes
+        const deleteTime = 5 * 60 * 1000; // 5 minutes in milliseconds
+        setTimeout(() => {
+          fs.unlink(filename, (err) => {
+            if (err) {
+              console.error(`Error deleting file ${filename}:`, err);
+            } else {
+              console.log(`File ${filename} deleted successfully.`);
+            }
+          });
+        }, deleteTime);
       });
     } catch (err) {
       socket.emit('download-error', { error: err.message });
@@ -66,6 +78,7 @@ io.on('connection', function(socket) {
     }
   });
 });
+
 
 // Route for rendering the home page
 app.get('/', (req, res) => {
