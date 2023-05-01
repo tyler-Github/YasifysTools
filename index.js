@@ -39,7 +39,7 @@ io.on('connection', function(socket) {
         fs.mkdirSync(downloadFolder);
       }
 
-      const video = ytdl(url, { filter: 'audioandvideo' });
+      const video = ytdl(url, { filter: 'audioandvideo', quality: 'highest' });
       video.pipe(fs.createWriteStream(filename));
 
       let totalSize = 0;
