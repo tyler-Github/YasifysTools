@@ -13,7 +13,15 @@ You can find the docker image [here](https://hub.docker.com/r/insidiousfiddler/y
 Run the following command from the root project to build the docker image:
 
 ```bash
-docker buildx build --platform linux/amd64,linux/arm64 --tag insidiousfiddler/yasifystools:{version} --push .
+docker buildx build --platform linux/amd64,linux/arm64 --tag yasifystools .
+```
+
+### Run
+
+Run the following command to run the docker image:
+
+```bash
+docker pull insidiousfiddler/yasifystools && docker run -it --rm insidiousfiddler/yasifystools
 ```
 
 ## Usage
