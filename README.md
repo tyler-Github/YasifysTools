@@ -51,10 +51,6 @@ Run the following command to run the docker image:
 docker pull insidiousfiddler/yasifystools && docker run -it --rm -p 0:3000 insidiousfiddler/yasifystools
 ```
 
-## Usage
-
-A website with tools to download videos from popular social media platforms.
-
 [contributors-shield]: https://img.shields.io/github/contributors/tyler-Github/YasifysTools.svg?style=for-the-badge
 [contributors-url]: https://github.com/tyler-Github/YasifysTools/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/tyler-Github/YasifysTools.svg?style=for-the-badge
