@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>YouTube Downloader - Download YouTube Videos in MP4 Format</title>
+  <meta name="description" content="With our YouTube downloader, you can easily download any YouTube video in MP4 format. Simply enter the video URL and click Download.">
+  <meta name="keywords" content="YouTube downloader, download YouTube videos, YouTube MP4 downloader">
+  <link rel="canonical" href="https://www.yasifys.tk/youtube-downloader">
+  <meta property="og:title" content="YouTube Downloader - Download YouTube Videos in MP4 Format">
+  <meta property="og:description" content="With our YouTube downloader, you can easily download any YouTube video in MP4 format. Simply enter the video URL and click Download.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.yasifys.tk/youtube-downloader">
+  <meta property="og:image" content="https://www.yasifys.tk/card/Card.png">
+  <meta property="og:image:alt" content="YouTube Downloader">
+  <meta property="og:site_name" content="https://www.yasifys.tk">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="YouTube Downloader - Download YouTube Videos in MP4 Format">
+  <meta name="twitter:description" content="With our YouTube downloader, you can easily download any YouTube video in MP4 format. Simply enter the video URL and click Download.">
+  <meta name="twitter:image" content="https://www.yasifys.tk/card/Card.png">
+  <meta name="twitter:image:alt" content="YouTube Downloader">
+
+    <link rel="icon" type="image/png" href="/favicon/favicon32x32.png">
+
+  <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+    }
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      margin: 0 auto;
+      margin-top: 50px;
+      text-align: center;
+      background-color: #fff;
+      border: none;
+    }
+    .card-header {
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+    .card-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    .form-control {
+      height: 50px;
+      font-size: 18px;
+      border: none;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      border-radius: 50px;
+      padding: 0 20px;
+    }
+    .form-control:focus {
+      box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+    }
+    .btn-primary {
+      background-color: #f00;
+      border: none;
+      border-radius: 50px;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 30px;
+      margin-left: 10px;
+      cursor: pointer;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+    .btn-primary:hover {
+      background-color: #d00;
+    }
+    .progress {
+      height: 20px;
+      margin-top: 30px;
+      margin-bottom: 0;
+      box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    }
+    .progress-bar {
+      background-color: #f00;
+      transition: width 0.5s ease-in-out;
+    }
+    .card-img-top {
+      max-height: 300px;
+      object-fit: cover;
+    }
+    .card-text {
+      margin-top: 20px;
+      margin-bottom: 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .btn-success {
+      background-color: #f00;
+      border: none;
+      border-radius: 50px;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 30px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .btn-success:hover {
+      background-color: #d00;
+    }
+     #progress-bar {
+      transition: width 1s ease-in-out;
+    }
+
+         .bg-youtube {
+      background-color: #FF0000;
+    }
+
+    .bg-youtube .progress-bar {
+      background-color: #FFFFFF;
+    }
+  </style>
+</head>
+<body lang="en-GB">
+ <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Yasifys</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Tools
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/tiktok">TikTok Downloader</a></li>
+            <li><a class="dropdown-item" href="#">Instagram Downloader</a></li>
+            <li><a class="dropdown-item" href="#">Facebook Downloader</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h1 class="card-title text-center">YouTube Downloader</h1>
+          </div>
+          <div class="card-body">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" pattern="https?://.+" id="video-url" placeholder="Enter YouTube video URL">
+              <button type="button" class="btn btn-primary" onclick="downloadVideo()">Download</button>
+            </div>
+            <div id="download-status"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+
+    socket.on('connect', function() {
+      console.log('Client connected to server.');
+    });
+
+    function downloadVideo() {
+      const url = document.getElementById('video-url').value;
+      if (!url) return;
+
+socket.emit('download-video', url);
+document.getElementById('download-status').innerHTML = `
+  <div class="card bg-light">
+    <div class="card-body">
+      <p id="downloading-text" class="card-text">Downloading...</p>
+      <div class="progress mb-2">
+<div id="progress-bar" class="progress-bar bg-red" role="progressbar"
+  style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+      <p class="card-text">Your video will be available to download shortly.</p>
+    </div>
+  </div>
+      `;
+    }
+
+       socket.on('download-error', function(data) {
+    const error = data.error;
+    document.getElementById('download-status').innerHTML = `
+      <div class="alert alert-danger" role="alert">
+        ${error}
+      </div>
+    `;
+  });
+
+    socket.on('download-progress', function(data) {
+      const progress = data.progress;
+  const progressBar = document.getElementById('progress-bar');
+  progressBar.value = progress;
+    });
+
+    socket.on('download-complete', function(data) {
+      const { filename, thumbnail, title, FinishedName } = data;
+      document.getElementById('download-status').innerHTML = `
+        <div class="card">
+          <img src="${thumbnail}" class="card-img-top" alt="${title}">
+          <div class="card-body">
+            <h5 class="card-title">${title}</h5>
+            <p class="card-text">Download complete!</p>
+            <a href="download?url=${FinishedName}" class="btn btn-success">Download</a>
+          </div>
+        </div>
+      `;
+    });
+    var progress = 0;
+    setInterval(function() {
+    progress += Math.random() * 10;
+    if (progress > 100) progress = 100;
+
+      var downloadingText = document.getElementById('downloading-text');
+
+document.getElementById("progress-bar").style.width = progress + "%";
+    document.getElementById("progress-bar").setAttribute("aria-valuenow", progress);
+      if (progress >= 100) {
+    setTimeout(function() {
+      document.getElementById("downloading-text").innerHTML = "Processing...";
+    }, 1000);
+  }
+  }, 100);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

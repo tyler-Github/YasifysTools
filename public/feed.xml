@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Yasifys - Video Downloader</title>
+    <link>https://www.yasifys.tk/</link>
+    <description>Yasifys is a video downloader that allows you to download videos from YouTube, TikTok, and more.</description>
+    <language>en-us</language>
+    <pubDate>Mon, 02 May 2023 00:00:00 GMT</pubDate>
+    <lastBuildDate>Mon, 02 May 2023 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>About Us</title>
+      <link>https://www.yasifys.tk/about</link>
+      <description>Learn more about Yasifys and what we do.</description>
+      <pubDate>Fri, 28 Apr 2023 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Yasifys - Video Downloader</title>
+      <link>https://www.yasifys.tk/</link>
+      <description>Download videos from YouTube, TikTok, and more.</description>
+      <pubDate>Fri, 28 Apr 2023 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>TikTok Downloader</title>
+      <link>https://www.yasifys.tk/tiktok</link>
+      <description>Download TikTok videos with Yasifys.</description>
+      <pubDate>Fri, 28 Apr 2023 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

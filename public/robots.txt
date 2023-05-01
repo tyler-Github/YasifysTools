@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /feed.xml
+Sitemap: https://www.yasifys.tk/sitemap.xml
