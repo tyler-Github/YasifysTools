@@ -69,9 +69,10 @@ io.on('connection', function (socket) {
         setTimeout(() => {
           fs.unlink(filename, (err) => {
             if (err) {
+              if (err.syscall === 'unlink') console.log('Could not find file to delete:', filename);
               console.error(`Error deleting file ${filename}:`, err);
             } else {
-              console.log(`File ${filename} deleted successfully.`);
+              console.log(`File auto-deleted: ${filename}`);
             }
           });
         }, deleteTime);
