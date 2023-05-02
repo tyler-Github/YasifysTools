@@ -23,6 +23,11 @@ const io = new Server(server);
 // Create a list of socket connections
 const connections = [];
 
+/**
+ * Sanitize a string to be used as a filename
+ * @param {string} str The string to sanitize
+ * @returns {string} The sanitized string
+ */
 const slug = (str) => str.replace(/[^a-zA-Z0-9\s-]/g, '');
 
 io.on('connection', function (socket) {
