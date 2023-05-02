@@ -23,12 +23,16 @@ const io = new Server(server);
 // Create a list of socket connections
 const connections = [];
 
-function slug(str) {
-  return str.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
-}
+const slug = str =>
+  str
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 
-io.on('connection', function(socket) {
-  socket.on('download-video', async function(url) {
+io.on('connection', function (socket) {
+  socket.on('download-video', async function (url) {
     console.log('Starting download:', url);
 
     try {
