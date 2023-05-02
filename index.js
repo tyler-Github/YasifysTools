@@ -57,6 +57,7 @@ io.on('connection', function(socket) {
         socket.emit('download-progress', { progress });
       });
       video.on('end', () => {
+        console.log('Download complete:', url);
         socket.emit('download-complete', { filename, thumbnail, title, FinishedName });
 
         // Delete the file after 5 minutes
