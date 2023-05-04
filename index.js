@@ -52,7 +52,7 @@ io.on('connection', function (socket) {
       let totalSize = 0;
       let downloadedSize = 0;
       video.on('info', (info) => {
-        totalSize = info.size;
+        totalSize = info.formats[0].contentLength;
       });
       video.on('data', (chunk) => {
         downloadedSize += chunk.length;
