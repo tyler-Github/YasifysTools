@@ -7,7 +7,8 @@ const { createServer } = require('http');
 const { Server } = require("socket.io");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const app_url = process.env.APP_URL || 'http://localhost';
+const app_port = process.env.APP_PORT || 3000;
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
@@ -149,6 +150,6 @@ app.use((err, req, res, next) => {
   res.render('index', { error: err.message });
 });
 
-server.listen(port, () => {
-  console.log(`Server started on port ${port}`);
+server.listen(app_port, () => {
+  console.log(`Server started: ${app_url}:${app_port}`);
 });
