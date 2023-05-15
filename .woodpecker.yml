@@ -1,0 +1,11 @@
+pipeline:
+  - name: Test
+    image: node:14-alpine
+    commands:
+      - apk add --no-cache curl
+      - npm install
+      - npm start &
+      - sleep 5 # wait for the server to start up
+      - curl -s localhost:3000
+    ports:
+      - 3000:3000

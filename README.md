@@ -3,6 +3,7 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield]][issues-url]
 [![Forks][forks-shield]][forks-url]
+[![Build Status][status-badge]][status-url]
 
 A website with tools to download videos from popular social media platforms.
 
@@ -57,9 +58,11 @@ Use the following command to run the official docker image:
 docker pull insidiousfiddler/yasifystools && docker run -it --rm -p 0:3000 insidiousfiddler/yasifystools
 ```
 
-[contributors-shield]: https://img.shields.io/github/contributors/tyler-Github/YasifysTools.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/tyler-Github/YasifysTools.svg
 [contributors-url]: https://github.com/tyler-Github/YasifysTools/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/tyler-Github/YasifysTools.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/tyler-Github/YasifysTools.svg
 [forks-url]: https://github.com/tyler-Github/YasifysTools/network
-[issues-shield]: https://img.shields.io/github/issues/tyler-Github/YasifysTools.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/tyler-Github/YasifysTools.svg
 [issues-url]: https://github.com/tyler-Github/YasifysTools/issues
+[status-badge]: https://woodpecker.vahngomes.dev/api/badges/Codycody31/YasifysTools/status.svg
+[status-url]: https://woodpecker.vahngomes.dev/Codycody31/YasifysTools
