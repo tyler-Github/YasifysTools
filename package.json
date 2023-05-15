@@ -2,9 +2,9 @@
   "name": "nodejs",
   "version": "0.8.11",
   "description": "A website with tools to download videos from popular social media platforms.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
