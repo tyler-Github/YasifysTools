@@ -1,5 +1,5 @@
 {
-  "name": "nodejs",
+  "name": "yasifys-tools",
   "version": "0.8.11",
   "description": "A website with tools to download videos from popular social media platforms.",
   "main": "app.js",
