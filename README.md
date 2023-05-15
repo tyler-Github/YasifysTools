@@ -37,10 +37,16 @@ You can find the docker image [here](https://hub.docker.com/r/insidiousfiddler/y
 
 ### Build
 
-Use the following command from the root project to build the docker image:
+Use the following command from the root project to build the docker image for multiple platforms:
 
 ```bash
 docker buildx build --platform linux/amd64,linux/arm64 --tag yasifystools .
+```
+
+Or use the following command to build the docker image for a single platform:
+
+```bash
+docker build --tag yasifystools .
 ```
 
 ### Run
