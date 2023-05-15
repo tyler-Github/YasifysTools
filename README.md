@@ -8,10 +8,10 @@ A website with tools to download videos from popular social media platforms.
 
 ## Tools
 
-* YouTube video downloader
-* TikTok video downloader
-* Instagram video downloader
-* Facebook video downloader
+- YouTube video downloader
+- TikTok video downloader (coming soon)
+- Instagram video downloader (coming soon)
+- Facebook video downloader (coming soon)
 
 ## Installation
 
@@ -37,7 +37,7 @@ You can find the docker image [here](https://hub.docker.com/r/insidiousfiddler/y
 
 ### Build
 
-Run the following command from the root project to build the docker image:
+Use the following command from the root project to build the docker image:
 
 ```bash
 docker buildx build --platform linux/amd64,linux/arm64 --tag yasifystools .
@@ -45,7 +45,7 @@ docker buildx build --platform linux/amd64,linux/arm64 --tag yasifystools .
 
 ### Run
 
-Run the following command to run the docker image:
+Use the following command to run the official docker image:
 
 ```bash
 docker pull insidiousfiddler/yasifystools && docker run -it --rm -p 0:3000 insidiousfiddler/yasifystools
