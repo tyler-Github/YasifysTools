@@ -83,8 +83,10 @@ io.on('connection', function (socket) {
         }, deleteTime);
       });
     } catch (err) {
+      // Remove any elements that could be used for XSS
+      err.message = err.message.replace(/<|>/g, '');
       socket.emit('download-error', { error: err.message });
-      console.log('Error getting video info:', err);
+      console.error('Error:', err.message);
       return;
     }
   });
