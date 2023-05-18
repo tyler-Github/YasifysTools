@@ -9,3 +9,4 @@ pipeline:
       - curl -s localhost:3000
     ports:
       - 3000:3000
+branches: [main, dev-*, feature-*]
