@@ -35,4 +35,4 @@ pipeline:
     when:
       event: tag
 
-branches: [main, dev-*, feature-*]
+branches: [main]
