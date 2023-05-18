@@ -4,6 +4,8 @@
 [![Issues][issues-shield]][issues-url]
 [![Forks][forks-shield]][forks-url]
 [![Build Status][status-badge]][status-url]
+[![MIT License](https://img.shields.io/github/license/tyler-Github/YasifysTools.svg)](LICENSE)
+[![Docker Pulls](https://img.shields.io/docker/pulls/insidiousfiddler/yasifystools.svg)](https://hub.docker.com/r/insidiousfiddler/yasifystools)
 
 A website with tools to download videos from popular social media platforms.
 
@@ -34,7 +36,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Docker
 
-You can find the docker image [here](https://hub.docker.com/r/insidiousfiddler/yasifystools/tags). The image is based on node Alpine Linux and is about 50MB in size.
+You can find the docker image [here](https://hub.docker.com/r/insidiousfiddler/yasifystools/tags).
 
 ### Build
 
