@@ -1,6 +1,11 @@
+variables:
+  - &node_image "node:14-alpine"
+  - &buildx_image "woodpeckerci/plugin-docker-buildx"
+  - &platforms "linux/amd64,linux/arm64,linux/arm/v7"
+
 pipeline:
   - name: Test
-    image: node:14-alpine
+    image: *node_image
     commands:
       - apk add --no-cache curl
       - npm install
@@ -9,4 +14,12 @@ pipeline:
       - curl -s localhost:3000
     ports:
       - 3000:3000
+  - name: Deploy
+    image: *buildx_image
+    secrets: [docker_username, docker_password]
+    settings:
+      repo: insidiousfiddler/yasifystools
+      dockerfile: Dockerfile
+      platforms: *platforms
+      tag: latest
 branches: [main, dev-*, feature-*]
