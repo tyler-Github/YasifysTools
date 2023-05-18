@@ -122,25 +122,25 @@ app.get('/download', (req, res) => {
 
   fs.access(filePath, (err) => {
     if (err) {
-      console.log(`Error accessing file: ${filename}`, err);
-      res.status(404).send(`File "${filename}" not found`);
+      console.log(`Error: Could not find video "${filename}"`);
+      res.status(404).send(`Video "${filename}" not found`);
       return;
     }
 
     res.download(filePath, filename, (err) => {
       if (err) {
-        console.log(`Error downloading file: ${filename}`, err);
-        res.status(500).send(`Error downloading file "${filename}"`);
+        console.log(`Error: Could not download video "${filename}"`);
+        res.status(500).send(`Error downloading video "${filename}"`);
         return;
       }
 
-      console.log(`File downloaded: ${filename}`);
+      console.log(`Video downloaded: ${filename}`);
       fs.unlink(filePath, (err) => {
         if (err) {
-          console.log(`Error deleting file: ${filename}`, err);
+          console.log(`Error: Could not delete video "${filename}" after download`);
           return;
         }
-        console.log(`File deleted: ${filename}`);
+        console.log(`Video deleted: ${filename}`);
       });
     });
   });
