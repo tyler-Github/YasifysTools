@@ -65,7 +65,7 @@ io.on('connection', function (socket) {
         socket.emit('download-complete', { filename, thumbnail, title, FinishedName });
 
         // Delete the file after 5 minutes
-        const deleteTime = 5 * 60 * 1000; // 5 minutes in milliseconds
+        const deleteTime = 20 * 60 * 1000; // 20 minutes in milliseconds
         setTimeout(() => {
           fs.unlink(filename, (err) => {
             if (err) {
@@ -144,6 +144,17 @@ app.get('/download', (req, res) => {
       });
     });
   });
+});
+
+app.get('/player', (req, res) => {
+  const { url, title } = req.query;
+  const filePath = path.join('/downloads', url);
+
+  res.render('player', { url: filePath, title });
+});
+
+app.use((req, res, next) => {
+  res.status(404).render('404');
 });
 
 // Error handling middleware
