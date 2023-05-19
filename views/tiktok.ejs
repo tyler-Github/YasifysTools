@@ -266,6 +266,7 @@
       document.getElementById("progress-bar").setAttribute("aria-valuenow", progress);
       if (progress >= 100) {
         setTimeout(function () {
+          if (!document.getElementById("downloading-text")) return;
           document.getElementById("downloading-text").innerHTML = "Processing...";
         }, 1000);
       }
