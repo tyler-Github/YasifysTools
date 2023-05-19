@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>VideoPlayer - <%= title %></title>
+  <meta name="description" content="Yasifys is a free online tool for downloading videos from popular video sharing websites, including YouTube, TikTok, Facebook, and more.">
+  <meta name="keywords" content="YouTube downloader, TikTok downloader, Facebook downloader, video downloader">
+  <link rel="canonical" href="https://www.yasifys.tk/player">
+  <meta property="og:title" content="VideoPlayer - <%= title %>">
+  <meta property="og:description" content="Yasifys is a free online tool for downloading videos from popular video sharing websites, including YouTube, TikTok, Facebook, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.yasifys.tk/player">
+  <meta property="og:image" content="https://www.yasifys.tk/card/Card.png">
+  <meta property="og:image:alt" content="Yasifys logo">
+  <meta property="og:site_name" content="Yasifys">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="About - Yasifys YouTube Downloader">
+  <meta name="twitter:description" content="Yasifys is a free online tool for downloading videos from popular video sharing websites, including YouTube, TikTok, Facebook, and more.">
+  <meta name="twitter:image" content="https://www.yasifys.tk/card/Card.png">
+  <meta name="twitter:image:alt" content="Yasifys logo">
+
+    <link rel="icon" type="image/png" href="/favicon/favicon32x32.png">
+
+  <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+    }
+    .embed-responsive-16by9 {
+      max-height: 400px; 
+    }
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      margin: 0 auto;
+      margin-top: 50px;
+      text-align: center;
+      background-color: #fff;
+      border: none;
+    }
+    .card-header {
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+    .card-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    .form-control {
+      height: 50px;
+      font-size: 18px;
+      border: none;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      border-radius: 50px;
+      padding: 0 20px;
+    }
+    .form-control:focus {
+      box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+    }
+    .btn-primary {
+      background-color: #f00;
+      border: none;
+      border-radius: 50px;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 30px;
+      margin-left: 10px;
+      cursor: pointer;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+    .btn-primary:hover {
+      background-color: #d00;
+    }
+    .progress {
+      height: 20px;
+      margin-top: 30px;
+      margin-bottom: 0;
+      box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    }
+    .progress-bar {
+      background-color: #f00;
+      transition: width 0.5s ease-in-out;
+    }
+    .card-img-top {
+      max-height: 300px;
+      object-fit: cover;
+    }
+    .card-text {
+      margin-top: 20px;
+      margin-bottom: 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .btn-success {
+      background-color: #f00;
+      border: none;
+      border-radius: 50px;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 30px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .btn-success:hover {
+      background-color: #d00;
+    }
+     #progress-bar {
+      transition: width 1s ease-in-out;
+    }
+
+         .bg-youtube {
+      background-color: #FF0000;
+    }
+
+    .bg-youtube .progress-bar {
+      background-color: #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+ <div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="card-title text-center"><%= title %></h1>
+        </div>
+        <div class="card-body">
+          <div class="embed-responsive embed-responsive-16by9">
+            <video class="embed-responsive embed-responsive-16by9" class="embed-responsive-item" controls>
+              <source src="<%= url %>" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
