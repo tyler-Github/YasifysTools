@@ -36,3 +36,4 @@ pipeline:
       event: tag
 
 branches: [main]
+ignore_paths: [README.md]
