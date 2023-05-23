@@ -14,8 +14,6 @@ pipeline:
       - curl -s localhost:3000
     ports:
       - 3000:3000
-    when:
-      event: push
 
   - name: Deploy to Docker Hub
     image: *buildx_image
@@ -25,7 +23,7 @@ pipeline:
       dockerfile: Dockerfile
       platforms: *platforms
       tag: latest
-     when:
+    when:
       event: push
 
   - name: Deploy Tagged Version
