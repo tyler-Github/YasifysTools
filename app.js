@@ -164,5 +164,6 @@ app.use((err, req, res, next) => {
 });
 
 server.listen(app_port, () => {
+  console.log(`Yasifys Tools version: ${process.env.npm_package_version}`);
   console.log(`Server started: ${app_url}:${app_port}`);
 });
