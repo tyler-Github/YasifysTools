@@ -23,6 +23,8 @@ pipeline:
       dockerfile: Dockerfile
       platforms: *platforms
       tag: latest
+    when:
+      event: push
 
   - name: Deploy Tagged Version
     image: *buildx_image
@@ -36,4 +38,4 @@ pipeline:
       event: tag
 
 branches: [main]
-ignore_paths: [README.md]
+ignore_paths: [README.md, LICENSE, .github, .gitignore]

@@ -1,6 +1,6 @@
 {
   "name": "yasifys-tools",
-  "version": "0.8.16",
+  "version": "0.8.17",
   "description": "A website with tools to download videos from popular social media platforms.",
   "main": "app.js",
   "scripts": {
@@ -16,6 +16,6 @@
     "node-fetch": "^3.2.6",
     "sanitize-filename": "^1.6.3",
     "socket.io": "^4.6.1",
-    "ytdl-core": "^4.11.4"
+    "ytdl-core": "4.10.0"
   }
 }
