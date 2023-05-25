@@ -66,5 +66,5 @@ docker pull insidiousfiddler/yasifystools && docker run -it --rm -p 0:3000 insid
 [forks-url]: https://github.com/tyler-Github/YasifysTools/network
 [issues-shield]: https://img.shields.io/github/issues/tyler-Github/YasifysTools.svg
 [issues-url]: https://github.com/tyler-Github/YasifysTools/issues
-[status-badge]: https://woodpecker.vahngomes.dev/api/badges/Codycody31/YasifysTools/status.svg
-[status-url]: https://woodpecker.vahngomes.dev/Codycody31/YasifysTools
+[status-badge]: https://woodpecker.vahngomes.dev/api/badges/tyler-Github/YasifysTools/status.svg
+[status-url]: https://woodpecker.vahngomes.dev/tyler-Github/YasifysTools
