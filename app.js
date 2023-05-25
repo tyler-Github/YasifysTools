@@ -77,7 +77,11 @@ io.on('connection', function (socket) {
                 console.error(`Error deleting file ${filename}:`, err);
               }
             } else {
+              // File deleted
               console.log(`File auto-deleted: ${filename}`);
+
+              // Notify the client that the file was deleted
+              socket.emit('download-auto-deleted', { filename });
             }
           });
         }, deleteTime);
