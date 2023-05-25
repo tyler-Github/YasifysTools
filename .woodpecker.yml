@@ -33,7 +33,7 @@ pipeline:
       repo: insidiousfiddler/yasifystools
       dockerfile: Dockerfile
       platforms: *platforms
-      tag: [latest, "${CI_COMMIT_TAG}"]
+      tag: [latest, "${CI_COMMIT_TAG:1}"]
     when:
       event: tag
 
