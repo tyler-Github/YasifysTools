@@ -102,12 +102,12 @@ app.get('/', (req, res) => {
   res.render('index', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version });
 });
 
-// Route for rendering the home page
+// Route for rendering the about page
 app.get('/about', (req, res) => {
   res.render('about', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version });
 });
 
-// Route for rendering the home page
+// Route for rendering the tiktok page
 app.get('/tiktok', (req, res) => {
   res.render('tiktok', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version });
 });
