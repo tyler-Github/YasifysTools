@@ -99,17 +99,17 @@ io.on('connection', function (socket) {
 
 // Route for rendering the home page
 app.get('/', (req, res) => {
-  res.render('index', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null });
+  res.render('index', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version });
 });
 
-// Route for rendering the home page
+// Route for rendering the about page
 app.get('/about', (req, res) => {
-  res.render('about', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null });
+  res.render('about', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version });
 });
 
-// Route for rendering the home page
+// Route for rendering the tiktok page
 app.get('/tiktok', (req, res) => {
-  res.render('tiktok', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null });
+  res.render('tiktok', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version });
 });
 
 
@@ -154,7 +154,7 @@ app.get('/player', (req, res) => {
   const { url, title } = req.query;
   const filePath = path.join('/downloads', url);
 
-  res.render('player', { url: filePath, title });
+  res.render('player', { url: filePath, title, version: process.env.npm_package_version });
 });
 
 app.use((req, res, next) => {
@@ -164,7 +164,7 @@ app.use((req, res, next) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.render('index', { error: err.message });
+  res.render('index', { error: err.message, version: process.env.npm_package_version });
 });
 
 server.listen(app_port, () => {
