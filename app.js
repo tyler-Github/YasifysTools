@@ -27,6 +27,9 @@ const io = new Server(server);
 // Create a list of socket connections
 const connections = [];
 
+// Routers
+var indexRouter = require("./routes/index");
+
 /**
  * Sanitize a string to be used as a filename
  * @param {string} str The string to sanitize
@@ -99,66 +102,8 @@ io.on('connection', function (socket) {
   });
 });
 
-
-// Route for rendering the home page
-app.get('/', (req, res) => {
-  res.render('index', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version });
-});
-
-// Route for rendering the about page
-app.get('/about', (req, res) => {
-  res.render('about', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version });
-});
-
-// Route for rendering the tiktok page
-app.get('/tiktok', (req, res) => {
-  res.render('tiktok', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version });
-});
-
-
-// Route for serving the downloaded video
-app.get('/download', (req, res) => {
-  const url = req.query.url;
-  if (!url) {
-    res.status(400).send('Missing "url" parameter');
-    return;
-  }
-
-  const filename = decodeURIComponent(url);
-  const filePath = path.join(__dirname, downloadFolder, filename);
-
-  fs.access(filePath, (err) => {
-    if (err) {
-      console.log(`Error: Could not find video "${filename}"`);
-      res.status(404).send(`Video "${filename}" not found`);
-      return;
-    }
-
-    res.download(filePath, filename, (err) => {
-      if (err) {
-        console.log(`Error: Could not download video "${filename}"`);
-        res.status(500).send(`Error downloading video "${filename}"`);
-        return;
-      }
-
-      console.log(`Video downloaded: ${filename}`);
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.log(`Error: Could not delete video "${filename}" after download`);
-          return;
-        }
-        console.log(`Video deleted: ${filename}`);
-      });
-    });
-  });
-});
-
-app.get('/player', (req, res) => {
-  const { url, title } = req.query;
-  const filePath = path.join('/downloads', url);
-
-  res.render('player', { url: filePath, title, version: process.env.npm_package_version });
-});
+// Routes
+app.use("/", indexRouter);
 
 app.use((req, res, next) => {
   res.status(404).render('404');
@@ -170,7 +115,11 @@ app.use((err, req, res, next) => {
   res.render('index', { error: err.message, version: process.env.npm_package_version });
 });
 
-// Get releases from GitHub
+/**
+ * Get releases from GitHub
+
+ * @returns {Promise} A promise that resolves to the releases
+ */
 async function getReleases() {
   const response = await fetch('https://api.github.com/repos/tyler-Github/YasifysTools/releases');
   const data = await response.json();
