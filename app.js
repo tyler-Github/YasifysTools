@@ -7,6 +7,7 @@ const { createServer } = require('http');
 const { Server } = require("socket.io");
 const { release } = require('os');
 const semver = require('semver');
+const fetch = require("node-fetch");
 
 const app = express();
 const app_url = process.env.APP_URL || 'http://localhost';
