@@ -35,7 +35,6 @@ router.get('/download', (req, res) => {
 
     const filename = decodeURIComponent(url);
     const filePath = path.join(__dirname, downloadFolder, filename);
-    console.log(`path: ${filePath}`);
     fs.access(filePath, (err) => {
         if (err) {
             console.log(`Error: Could not find video "${filename}"`);
