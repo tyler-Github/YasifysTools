@@ -5,6 +5,8 @@ const path = require('path');
 const sanitize = require('sanitize-filename');
 const { createServer } = require('http');
 const { Server } = require("socket.io");
+const { release } = require('os');
+const semver = require('semver');
 
 const app = express();
 const app_url = process.env.APP_URL || 'http://localhost';
@@ -167,7 +169,29 @@ app.use((err, req, res, next) => {
   res.render('index', { error: err.message, version: process.env.npm_package_version });
 });
 
-server.listen(app_port, () => {
-  console.log(`Yasifys Tools version: ${process.env.npm_package_version}`);
+// Get releases from GitHub
+async function getReleases() {
+  const response = await fetch('https://api.github.com/repos/tyler-Github/YasifysTools/releases');
+  const data = await response.json();
+  return data;
+}
+
+server.listen(app_port, async () => {
   console.log(`Server started: ${app_url}:${app_port}`);
+
+  console.log('Checking for updates...');
+  try {
+    const releases = await getReleases();
+    const currentVersion = process.env.npm_package_version;
+    const latestVersion = releases[0].tag_name.slice(1);
+
+    console.log(`Yasifys Tools version: ${currentVersion}`);
+    if (semver.gt(latestVersion, currentVersion)) {
+      console.log(`Update available: ${currentVersion} -> ${latestVersion}`);
+    } else {
+      console.log('Yasifys Tools is up to date');
+    }
+  } catch (err) {
+    console.error('Error:', err);
+  }
 });
