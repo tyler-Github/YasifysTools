@@ -13,7 +13,7 @@
     "@types/node": "^18.0.6",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "node-fetch": "^3.2.6",
+    "node-fetch": "^2.6.11",
     "sanitize-filename": "^1.6.3",
     "semver": "^7.5.1",
     "socket.io": "^4.6.1",
