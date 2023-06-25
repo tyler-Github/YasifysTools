@@ -63,11 +63,13 @@ const vLog = (message) => {
   }
 }
 
+// Socket.io events
 io.on('connection', function (socket) {
   socket.on('download-video', async function (url) {
     console.log('Starting download:', url);
 
     try {
+      // Get the video info
       const info = await ytdl.getInfo(url);
       const title = sanitize(info.videoDetails.title);
       const thumbnail = info.videoDetails.thumbnails[info.videoDetails.thumbnails.length - 1].url;
@@ -131,6 +133,7 @@ io.on('connection', function (socket) {
 // Routes
 app.use("/", indexRouter);
 
+// 404 middleware
 app.use((req, res, next) => {
   res.status(404).render('404');
 });
@@ -147,13 +150,19 @@ app.use((err, req, res, next) => {
  * @returns {Promise} A promise that resolves to the releases
  */
 async function getReleases() {
+  // Get the releases from GitHub
   const response = await fetch('https://api.github.com/repos/tyler-Github/YasifysTools/releases');
+  
+  // Parse the response as JSON
   const data = await response.json();
+
+  // Return the releases
   return data;
 }
 
 // Start the server on the specified port
 server.listen(app_port, async () => {
+  // Log the server URL and port
   console.log(`Server started: ${app_url}:${app_port}`);
 
   console.log('Checking for updates...');
