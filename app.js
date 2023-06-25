@@ -1,3 +1,4 @@
+// Packages
 const express = require('express');
 const ytdl = require('ytdl-core');
 const fs = require('fs');
@@ -9,16 +10,26 @@ const { release } = require('os');
 const semver = require('semver');
 const fetch = require("node-fetch");
 
+// Load environment variables
+require('dotenv').config();
+
+// Create Express app
 const app = express();
+
+// Set global variables
 const app_url = process.env.APP_URL || 'http://localhost';
 const app_port = process.env.APP_PORT || 3000;
+const app_verbose = process.env.APP_VERBOSE;
 
+// Set up the view engine
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+// Set up the download folder
 const downloadFolder = 'public/downloads';
 
+// Create server
 const server = createServer(app);
 
 // Initialize Socket.io
@@ -36,6 +47,21 @@ var indexRouter = require("./routes/index");
  * @returns {string} The sanitized string
  */
 const slug = (str) => str.replace(/[^a-zA-Z0-9\s-]/g, '');
+
+/**
+ * Verbose Console Log
+ * @param message - The message to log
+ */
+const vLog = (message) => {
+  // Check if verbose logging is enabled
+  if (app_verbose == true || app_verbose == 'true') {
+    // Append a [V] to the beginning of the message to indicate verbose logging
+    message = `[VERBOSE] ${message}`;
+
+    // Log the message
+    console.log(message);
+  }
+}
 
 io.on('connection', function (socket) {
   socket.on('download-video', async function (url) {
@@ -126,22 +152,32 @@ async function getReleases() {
   return data;
 }
 
+// Start the server on the specified port
 server.listen(app_port, async () => {
   console.log(`Server started: ${app_url}:${app_port}`);
 
   console.log('Checking for updates...');
   try {
+    // Get the releases from GitHub
+    vLog('Getting releases from GitHub...');
     const releases = await getReleases();
+
+    // Get the current and latest versions
     const currentVersion = process.env.npm_package_version;
     const latestVersion = releases[0].tag_name.slice(1);
 
-    console.log(`Yasifys Tools version: ${currentVersion}`);
+    // Log the current and latest versions
+    vLog(`Current version: ${currentVersion}`);
+    vLog(`Latest version: ${latestVersion}`);
+
+    // Check if the current version is less than the latest version
     if (semver.gt(latestVersion, currentVersion)) {
       console.log(`Update available: ${currentVersion} -> ${latestVersion}`);
     } else {
       console.log('Yasifys Tools is up to date');
     }
   } catch (err) {
+    // Return if there is an error
     console.error('Error:', err);
   }
 });
