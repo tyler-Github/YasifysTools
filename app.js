@@ -20,6 +20,7 @@ const app = express();
 const app_url = process.env.APP_URL || 'http://localhost';
 const app_port = process.env.APP_PORT || 3000;
 const app_verbose = process.env.APP_VERBOSE;
+const currentVersion = process.env.npm_package_version;
 
 // Set up the view engine
 app.set('view engine', 'ejs');
@@ -157,7 +158,7 @@ app.use((req, res, next) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.render('index', { error: err.message, version: process.env.npm_package_version });
+  res.render('index', { error: err.message, version: currentVersion });
 });
 
 /**
@@ -187,8 +188,7 @@ server.listen(app_port, async () => {
     vLog('Getting releases from GitHub...');
     const releases = await getReleases();
 
-    // Get the current and latest versions
-    const currentVersion = process.env.npm_package_version;
+    // Get the latest version
     const latestVersion = releases[0].tag_name.slice(1);
 
     // Log the current and latest versions
