@@ -71,16 +71,30 @@ io.on('connection', function (socket) {
     try {
       // Get the video info
       const info = await ytdl.getInfo(url);
+
+      // Get the video title and sanitize it
       const title = sanitize(info.videoDetails.title);
       const thumbnail = info.videoDetails.thumbnails[info.videoDetails.thumbnails.length - 1].url;
+
+      // Create the filename and sanitized title
       const sanitizedTitle = slug(info.videoDetails.title);
       const filename = `${downloadFolder}/${sanitizedTitle}-${info.videoDetails.videoId}.mp4`;
-
       const FinishedName = `${sanitizedTitle}-${info.videoDetails.videoId}.mp4`;
+
+      // Create the download folder if it doesn't exist
       if (!fs.existsSync(downloadFolder)) {
         fs.mkdirSync(downloadFolder);
       }
 
+      // Check if the file already exists
+      if (fs.existsSync(filename)) {
+        // Emit the download complete event
+        console.log('File already exists:', filename);
+        socket.emit('download-complete', { filename, thumbnail, title, FinishedName });
+        return;
+      }
+
+      // Download the video
       const video = ytdl(url, { filter: 'audioandvideo', quality: 'highest' });
       video.pipe(fs.createWriteStream(filename));
 
@@ -123,6 +137,8 @@ io.on('connection', function (socket) {
     } catch (err) {
       // Remove any elements that could be used for XSS
       err.message = err.message.replace(/<|>/g, '');
+
+      // Emit the download error event
       socket.emit('download-error', { error: err.message });
       console.error('Error:', err.message);
       return;
@@ -152,7 +168,7 @@ app.use((err, req, res, next) => {
 async function getReleases() {
   // Get the releases from GitHub
   const response = await fetch('https://api.github.com/repos/tyler-Github/YasifysTools/releases');
-  
+
   // Parse the response as JSON
   const data = await response.json();
 
