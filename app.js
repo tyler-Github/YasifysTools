@@ -20,6 +20,21 @@ const app = express();
 const app_url = process.env.APP_URL || 'http://localhost';
 const app_port = process.env.APP_PORT || 3000;
 const app_verbose = process.env.APP_VERBOSE;
+const currentVersion = process.env.npm_package_version;
+
+// Set up the Matomo and Google Analytics variables
+const { MATOMO_URL, MATOMO_SITE_ID, GA_TRACKING_ID } = process.env;
+
+// Set up the Matomo variables, if they are set
+if (MATOMO_URL && MATOMO_SITE_ID) {
+  var MATOMO = {
+    url: MATOMO_URL,
+    siteId: MATOMO_SITE_ID
+  };
+}
+else {
+  var MATOMO = null;
+}
 
 // Set up the view engine
 app.set('view engine', 'ejs');
@@ -151,13 +166,13 @@ app.use("/", indexRouter);
 
 // 404 middleware
 app.use((req, res, next) => {
-  res.status(404).render('404');
+  res.status(404).render('404', { matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.render('index', { error: err.message, version: process.env.npm_package_version });
+  res.render('index', { error: err.message, version: currentVersion, matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
 });
 
 /**
@@ -187,8 +202,7 @@ server.listen(app_port, async () => {
     vLog('Getting releases from GitHub...');
     const releases = await getReleases();
 
-    // Get the current and latest versions
-    const currentVersion = process.env.npm_package_version;
+    // Get the latest version
     const latestVersion = releases[0].tag_name.slice(1);
 
     // Log the current and latest versions
