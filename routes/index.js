@@ -3,18 +3,21 @@ var router = express.Router();
 const path = require('path');
 const fs = require('fs');
 const downloadFolder = '../public/downloads';
+const vlog = require('../app');
 
 // Load environment variables
 require('dotenv').config();
 
 // Set up the Matomo and Google Analytics variables
-const { MATOMO_URL, MATOMO_SITE_ID, GA_TRACKING_ID } = process.env;
+const MATOMO_URL = process.env.MATOMO_URL;
+const MATOMO_SITE_ID = process.env.MATOMO_SITE_ID;
+const GA_TRACKING_ID = process.env.GA_TRACKING_ID;
 
 // Set up the Matomo variables, if they are set
 if (MATOMO_URL && MATOMO_SITE_ID) {
     var MATOMO = {
-        url: MATOMO_URL,
-        siteId: MATOMO_SITE_ID
+        URL: MATOMO_URL,
+        SITE_ID: MATOMO_SITE_ID
     };
 }
 else {
