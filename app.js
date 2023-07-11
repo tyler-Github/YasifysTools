@@ -28,8 +28,8 @@ const { MATOMO_URL, MATOMO_SITE_ID, GA_TRACKING_ID } = process.env;
 // Set up the Matomo variables, if they are set
 if (MATOMO_URL && MATOMO_SITE_ID) {
   var MATOMO = {
-    url: MATOMO_URL,
-    siteId: MATOMO_SITE_ID
+    URL: MATOMO_URL,
+    SITE_ID: MATOMO_SITE_ID
   };
 }
 else {
