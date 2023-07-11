@@ -22,6 +22,20 @@ const app_port = process.env.APP_PORT || 3000;
 const app_verbose = process.env.APP_VERBOSE;
 const currentVersion = process.env.npm_package_version;
 
+// Set up the Matomo and Google Analytics variables
+const { MATOMO_URL, MATOMO_SITE_ID, GA_TRACKING_ID } = process.env;
+
+// Set up the Matomo variables, if they are set
+if (MATOMO_URL && MATOMO_SITE_ID) {
+  var MATOMO = {
+    url: MATOMO_URL,
+    siteId: MATOMO_SITE_ID
+  };
+}
+else {
+  var MATOMO = null;
+}
+
 // Set up the view engine
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
@@ -152,13 +166,13 @@ app.use("/", indexRouter);
 
 // 404 middleware
 app.use((req, res, next) => {
-  res.status(404).render('404');
+  res.status(404).render('404', { matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.render('index', { error: err.message, version: currentVersion });
+  res.render('index', { error: err.message, version: currentVersion, matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
 });
 
 /**

@@ -4,19 +4,36 @@ const path = require('path');
 const fs = require('fs');
 const downloadFolder = '../public/downloads';
 
+// Load environment variables
+require('dotenv').config();
+
+// Set up the Matomo and Google Analytics variables
+const { MATOMO_URL, MATOMO_SITE_ID, GA_TRACKING_ID } = process.env;
+
+// Set up the Matomo variables, if they are set
+if (MATOMO_URL && MATOMO_SITE_ID) {
+    var MATOMO = {
+        url: MATOMO_URL,
+        siteId: MATOMO_SITE_ID
+    };
+}
+else {
+    var MATOMO = null;
+}
+
 // Route for rendering the home page
 router.get('/', (req, res) => {
-    res.render('index', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version });
+    res.render('index', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version, matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
 });
 
 // Route for rendering the about page
 router.get('/about', (req, res) => {
-    res.render('about', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version });
+    res.render('about', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version, matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
 });
 
 // Route for rendering the tiktok page
 router.get('/tiktok', (req, res) => {
-    res.render('tiktok', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version });
+    res.render('tiktok', { error: null, title: null, thumbnail: null, filename: null, FinishedName: null, version: process.env.npm_package_version, matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
 });
 
 // Route for serving the downloaded video
@@ -65,7 +82,7 @@ router.get('/player', (req, res) => {
     const { url, title } = req.query;
     const filePath = path.join('/downloads', url);
 
-    res.render('player', { url: filePath, title, version: process.env.npm_package_version });
+    res.render('player', { url: filePath, title, version: process.env.npm_package_version, matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
 });
 
 module.exports = router;
