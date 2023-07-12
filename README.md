@@ -6,6 +6,7 @@
 [![Build Status][status-badge]][status-url]
 [![MIT License][license-badge]][license-url]
 [![Docker Pulls][docker-pulls-badge]][docker-pulls-url]
+[![Quality Gate Status](https://sonar.vahngomes.dev/api/project_badges/measure?project=yasifys-tools&metric=alert_status)](https://sonar.vahngomes.dev/dashboard?id=yasifys-tools)
 
 YouTube Downloader is a versatile tool that allows users to easily download YouTube videos in various formats. With this open-source project, you can quickly extract and save videos from YouTube by providing the video URL. The downloader supports popular video formats like MP4 and provides a simple and intuitive user interface.
 
