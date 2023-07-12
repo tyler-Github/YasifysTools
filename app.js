@@ -101,14 +101,6 @@ io.on('connection', function (socket) {
         fs.mkdirSync(downloadFolder);
       }
 
-      // Check if the file already exists
-      if (fs.existsSync(filename)) {
-        // Emit the download complete event
-        console.log('File already exists:', filename);
-        socket.emit('download-complete', { filename, thumbnail, title, FinishedName });
-        return;
-      }
-
       // Download the video
       const video = ytdl(url, { filter: 'audioandvideo', quality: 'highest' });
       video.pipe(fs.createWriteStream(filename));
