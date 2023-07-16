@@ -4,10 +4,14 @@ variables:
   - &platforms "linux/amd64,linux/arm64,linux/arm/v7"
 
 pipeline:
-  - name: Test
+  - name: Install Dependencies
     image: *node_image
     commands:
       - npm install
+
+  - name: Test
+    image: *node_image
+    commands:
       - npm test
 
   - name: Deploy to Docker Hub
