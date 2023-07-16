@@ -11,11 +11,21 @@ const testDatabaseName = `test-${process.env.DB_DATABASE}`;
 // Connect to the test database before running the tests
 beforeAll(async () => {
   const mongoURI = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}`;
-  await mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    dbName: testDatabaseName,
-  });
+  await mongoose
+    .connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName: testDatabaseName,
+    })
+    .then(() => {
+      console.log(
+        "Connected to MongoDB Database:",
+        process.env.DB_DATABASE || "YasifysTools"
+      );
+    })
+    .catch((error) => {
+      console.error("Error connecting to MongoDB:", error);
+    });
 });
 
 // Clear the test database after running the tests
