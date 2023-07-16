@@ -24,7 +24,6 @@ pipeline:
     image: *node_image
     environment:
       DB_HOST: mongodb
-      DB_PORT: 27017
       DB_NAME: yasifystools
     commands:
       - npm test
