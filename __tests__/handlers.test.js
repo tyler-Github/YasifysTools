@@ -1,4 +1,4 @@
-const { renderHomePage, renderAboutPage, renderTikTokPage, downloadVideo, renderPlayerPage } = require('../handlers');
+const { renderHomePage, renderAboutPage } = require('../handlers');
 
 describe('Handler Functions', () => {
     // Home Page
