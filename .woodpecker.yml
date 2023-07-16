@@ -6,6 +6,9 @@ variables:
 services:
   mongodb:
     image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
     ports:
       - 27017:27017
 
@@ -24,7 +27,10 @@ pipeline:
     image: *node_image
     environment:
       DB_HOST: mongodb
-      DB_NAME: yasifystools
+      DB_PORT: 27017
+      DB_DATABASE: test-yasifys-tools
+      DB_USERNAME: admin
+      DB_PASSWORD: password
     commands:
       - npm test
 
