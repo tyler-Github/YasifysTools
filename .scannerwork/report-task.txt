@@ -1,6 +1,0 @@
-projectKey=yasifys-tools
-serverUrl=https://sonar.vahngomes.dev
-serverVersion=7.7.0.23042
-dashboardUrl=https://sonar.vahngomes.dev/dashboard?id=yasifys-tools
-ceTaskId=AYiYOXUE30jNtJWUyY6Q
-ceTaskUrl=https://sonar.vahngomes.dev/api/ce/task?id=AYiYOXUE30jNtJWUyY6Q

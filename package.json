@@ -4,7 +4,8 @@
   "description": "A website with tools to download videos from popular social media platforms.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Tyler Github",
@@ -19,5 +20,8 @@
     "semver": "^7.5.1",
     "socket.io": "^4.6.1",
     "ytdl-core": "^4.11.5"
+  },
+  "devDependencies": {
+    "jest": "^29.6.1"
   }
 }
