@@ -8,7 +8,6 @@ const { Server } = require("socket.io");
 const semver = require('semver');
 const fetch = require("node-fetch");
 const mongoose = require('mongoose');
-const Download = require('./schemas/Download');
 
 // Load environment variables
 require('dotenv').config();
