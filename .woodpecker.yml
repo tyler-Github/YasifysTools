@@ -9,6 +9,11 @@ pipeline:
     commands:
       - npm install
 
+  - name: Lint
+    image: *node_image
+    commands:
+      - npm run lint
+
   - name: Test
     image: *node_image
     commands:
