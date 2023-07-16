@@ -7,6 +7,7 @@ const { createServer } = require('http');
 const { Server } = require("socket.io");
 const semver = require('semver');
 const fetch = require("node-fetch");
+const mongoose = require('mongoose');
 
 // Load environment variables
 require('dotenv').config();
@@ -34,6 +35,20 @@ if (MATOMO_URL && MATOMO_SITE_ID) {
 else {
   MATOMO = null;
 }
+
+// Connect to MongoDB
+mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}`
+  , {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: process.env.DB_DATABASE || 'YasifysTools',
+  })
+  .then(() => {
+    console.log('Connected to MongoDB Database:', process.env.DB_DATABASE || 'YasifysTools');
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+  });
 
 // Set up the view engine
 app.set('view engine', 'ejs');
