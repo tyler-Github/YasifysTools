@@ -4,16 +4,11 @@ variables:
   - &platforms "linux/amd64,linux/arm64,linux/arm/v7"
 
 pipeline:
-  - name: Test and Build
+  - name: Test
     image: *node_image
     commands:
-      - apk add --no-cache curl
       - npm install
-      - npm start &
-      - sleep 5 # wait for the server to start up
-      - curl -s localhost:3000
-    ports:
-      - 3000:3000
+      - npm test
 
   - name: Deploy to Docker Hub
     image: *buildx_image
