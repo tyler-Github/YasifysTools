@@ -30,7 +30,7 @@ beforeAll(async () => {
 
 // Clear the test database after running the tests
 afterAll(async () => {
-  //   await mongoose.connection.dropDatabase();
+  await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
 });
 
