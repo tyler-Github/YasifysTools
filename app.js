@@ -2,11 +2,9 @@
 const express = require('express');
 const ytdl = require('ytdl-core');
 const fs = require('fs');
-const path = require('path');
 const sanitize = require('sanitize-filename');
 const { createServer } = require('http');
 const { Server } = require("socket.io");
-const { release } = require('os');
 const semver = require('semver');
 const fetch = require("node-fetch");
 
@@ -21,19 +19,20 @@ const app_url = process.env.APP_URL || 'http://localhost';
 const app_port = process.env.APP_PORT || 3000;
 const app_verbose = process.env.APP_VERBOSE;
 const currentVersion = process.env.npm_package_version;
+var MATOMO = null;
 
 // Set up the Matomo and Google Analytics variables
 const { MATOMO_URL, MATOMO_SITE_ID, GA_TRACKING_ID } = process.env;
 
 // Set up the Matomo variables, if they are set
 if (MATOMO_URL && MATOMO_SITE_ID) {
-  var MATOMO = {
+  MATOMO = {
     URL: MATOMO_URL,
     SITE_ID: MATOMO_SITE_ID
   };
 }
 else {
-  var MATOMO = null;
+  MATOMO = null;
 }
 
 // Set up the view engine
@@ -49,9 +48,6 @@ const server = createServer(app);
 
 // Initialize Socket.io
 const io = new Server(server);
-
-// Create a list of socket connections
-const connections = [];
 
 // Routers
 var indexRouter = require("./routes/index");
@@ -107,7 +103,7 @@ io.on('connection', function (socket) {
         // Emit the download complete event
         console.log('File already exists:', filename);
         //socket.emit('download-complete', { filename, thumbnail, title, FinishedName });
-       // return;
+        // return;
       }
 
       // Download the video
@@ -166,12 +162,12 @@ io.on('connection', function (socket) {
 app.use("/", indexRouter);
 
 // 404 middleware
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.status(404).render('404', { matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
 });
 
 // Error handling middleware
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   console.error(err.stack);
   res.render('index', { error: err.message, version: currentVersion, matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
 });
