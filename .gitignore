@@ -131,3 +131,6 @@ dist
 
 # PhpStorm
 .idea/
+
+# Sonar Qube
+.scannerwork/
