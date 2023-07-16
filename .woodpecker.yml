@@ -37,5 +37,16 @@ pipeline:
     when:
       event: tag
 
+  - name: Deploy Pull Request
+    image: *buildx_image
+    secrets: [docker_username, docker_password]
+    settings:
+      repo: insidiousfiddler/yasifystools
+      dockerfile: Dockerfile
+      platforms: *platforms
+      tag: pull_${CI_COMMIT_PULL_REQUEST}
+    when:
+      event: pull_request
+
 branches: [main]
 ignore_paths: [README.md, LICENSE, .github, .gitignore]
