@@ -103,10 +103,11 @@ io.on('connection', function (socket) {
 
       // Check if the file already exists
       if (fs.existsSync(filename)) {
+        // This is a tempory fix, we will keep everyone updated on if this fixes the current downloadinf issues.
         // Emit the download complete event
         console.log('File already exists:', filename);
-        socket.emit('download-complete', { filename, thumbnail, title, FinishedName });
-        return;
+        //socket.emit('download-complete', { filename, thumbnail, title, FinishedName });
+       // return;
       }
 
       // Download the video
