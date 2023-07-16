@@ -3,6 +3,12 @@ variables:
   - &buildx_image "woodpeckerci/plugin-docker-buildx"
   - &platforms "linux/amd64,linux/arm64,linux/arm/v7"
 
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+
 pipeline:
   - name: Install Dependencies
     image: *node_image
@@ -16,6 +22,10 @@ pipeline:
 
   - name: Test
     image: *node_image
+    environment:
+      DB_HOST: mongodb
+      DB_PORT: 27017
+      DB_NAME: yasifystools
     commands:
       - npm test
 
