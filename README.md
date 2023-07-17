@@ -25,12 +25,6 @@ No installation is required to use this website. Simply navigate to the website 
 
 To use the YouTube video downloader, enter the URL of the video you want to download and click the "Download" button. The video will be downloaded in the highest quality available.
 
-To use the TikTok video downloader, enter the URL of the video you want to download and click the "Download" button. The video will be downloaded without a watermark.
-
-To use the Instagram video downloader, enter the URL of the video you want to download and click the "Download" button. The video will be downloaded in the highest quality available.
-
-To use the Facebook video downloader, enter the URL of the video you want to download and click the "Download" button. The video will be downloaded in the highest quality available.
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
