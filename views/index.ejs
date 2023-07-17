@@ -288,10 +288,12 @@
     <script>
       var socket = io();
 
+      // Connect to server
       socket.on("connect", function () {
         console.log("Client connected to server.");
       });
 
+      // Download video
       function downloadVideo() {
         const url = document.getElementById("video-url").value;
         if (!url) return;
@@ -311,6 +313,7 @@
       `;
       }
 
+      // Listen for download error
       socket.on("download-error", function (data) {
         const error = data.error;
         document.getElementById("download-status").innerHTML = `
@@ -320,12 +323,18 @@
     `;
       });
 
+      // Listen for download progress
       socket.on("download-progress", function (data) {
         const progress = data.progress;
+        console.log("Downloading: " + progress + "%");
         const progressBar = document.getElementById("progress-bar");
         progressBar.value = progress;
+        progressBar.innerHTML = progress + "%";
+        progressBar.style.width = progress + "%";
+        progressBar.setAttribute("aria-valuenow", progress);
       });
 
+      // Listen for download complete
       socket.on("download-complete", function (data) {
         const { filename, thumbnail, title, FinishedName } = data;
         document.getElementById("download-status").innerHTML = `
@@ -340,6 +349,8 @@
         </div>
       `;
       });
+
+      // Update progress bar every 100ms
       var progress = 0;
       setInterval(function () {
         progress += Math.random() * 10;
@@ -350,13 +361,18 @@
         // If progress-bar doesn't exist, return
         if (!document.getElementById("progress-bar")) return;
 
-        document.getElementById("progress-bar").style.width = progress + "%";
+        // document.getElementById("progress-bar").style.width = progress + "%";
         document
           .getElementById("progress-bar")
           .setAttribute("aria-valuenow", progress);
         if (progress >= 100) {
           setTimeout(function () {
             if (!document.getElementById("downloading-text")) return;
+            if (
+              document.getElementById("downloading-text").innerHTML ==
+              "Processing..."
+            )
+              return;
             document.getElementById("downloading-text").innerHTML =
               "Processing...";
           }, 1000);
