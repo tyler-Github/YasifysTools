@@ -1,22 +1,22 @@
 // Packages
-const express = require('express');
-const ytdl = require('ytdl-core');
-const fs = require('fs');
-const sanitize = require('sanitize-filename');
-const { createServer } = require('http');
+const express = require("express");
+const ytdl = require("ytdl-core");
+const fs = require("fs");
+const sanitize = require("sanitize-filename");
+const { createServer } = require("http");
 const { Server } = require("socket.io");
-const semver = require('semver');
+const semver = require("semver");
 const fetch = require("node-fetch");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // Load environment variables
-require('dotenv').config();
+require("dotenv").config();
 
 // Create Express app
 const app = express();
 
 // Set global variables
-const app_url = process.env.APP_URL || 'http://localhost';
+const app_url = process.env.APP_URL || "http://localhost";
 const app_port = process.env.APP_PORT || 3000;
 const app_verbose = process.env.APP_VERBOSE;
 const currentVersion = process.env.npm_package_version;
@@ -29,34 +29,39 @@ const { MATOMO_URL, MATOMO_SITE_ID, GA_TRACKING_ID } = process.env;
 if (MATOMO_URL && MATOMO_SITE_ID) {
   MATOMO = {
     URL: MATOMO_URL,
-    SITE_ID: MATOMO_SITE_ID
+    SITE_ID: MATOMO_SITE_ID,
   };
-}
-else {
+} else {
   MATOMO = null;
 }
 
 // Connect to MongoDB
-mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}`
-  , {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    dbName: process.env.DB_DATABASE || 'YasifysTools',
-  })
+mongoose
+  .connect(
+    `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName: process.env.DB_DATABASE || "YasifysTools",
+    }
+  )
   .then(() => {
-    console.log('Connected to MongoDB Database:', process.env.DB_DATABASE || 'YasifysTools');
+    console.log(
+      "Connected to MongoDB Database:",
+      process.env.DB_DATABASE || "YasifysTools"
+    );
   })
   .catch((error) => {
-    console.error('Error connecting to MongoDB:', error);
+    console.error("Error connecting to MongoDB:", error);
   });
 
 // Set up the view engine
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 // Set up the download folder
-const downloadFolder = 'public/downloads';
+const downloadFolder = "public/downloads";
 
 // Create server
 const server = createServer(app);
@@ -72,7 +77,7 @@ var indexRouter = require("./routes/index");
  * @param {string} str The string to sanitize
  * @returns {string} The sanitized string
  */
-const slug = (str) => str.replace(/[^a-zA-Z0-9\s-]/g, '');
+const slug = (str) => str.replace(/[^a-zA-Z0-9\s-]/g, "");
 
 /**
  * Verbose Console Log
@@ -80,19 +85,19 @@ const slug = (str) => str.replace(/[^a-zA-Z0-9\s-]/g, '');
  */
 const vLog = (message) => {
   // Check if verbose logging is enabled
-  if (app_verbose == true || app_verbose == 'true') {
+  if (app_verbose == true || app_verbose == "true") {
     // Append a [V] to the beginning of the message to indicate verbose logging
     message = `[VERBOSE] ${message}`;
 
     // Log the message
     console.log(message);
   }
-}
+};
 
 // Socket.io events
-io.on('connection', function (socket) {
-  socket.on('download-video', async function (url) {
-    console.log('Starting download:', url);
+io.on("connection", function (socket) {
+  socket.on("download-video", async function (url) {
+    console.log("Starting download:", url);
 
     try {
       // Get the video info
@@ -100,7 +105,9 @@ io.on('connection', function (socket) {
 
       // Get the video title and sanitize it
       const title = sanitize(info.videoDetails.title);
-      const thumbnail = info.videoDetails.thumbnails[info.videoDetails.thumbnails.length - 1].url;
+      const thumbnail =
+        info.videoDetails.thumbnails[info.videoDetails.thumbnails.length - 1]
+          .url;
 
       // Create the filename and sanitized title
       const sanitizedTitle = slug(info.videoDetails.title);
@@ -114,41 +121,53 @@ io.on('connection', function (socket) {
 
       // Check if the file already exists
       if (fs.existsSync(filename)) {
-        // This is a tempory fix, we will keep everyone updated on if this fixes the current downloadinf issues.
+        // This is a temporary fix, we will keep everyone updated on if this fixes the current downloading issues.
         // Emit the download complete event
-        console.log('File already exists:', filename);
+        console.warn(
+          `File already exists: ${filename}, but we are going to download it anyways.`
+        );
         //socket.emit('download-complete', { filename, thumbnail, title, FinishedName });
         // return;
       }
 
       // Download the video
-      const video = ytdl(url, { filter: 'audioandvideo', quality: 'highest' });
+      const video = ytdl(url, { filter: "audioandvideo", quality: "highest" });
       video.pipe(fs.createWriteStream(filename));
 
-      let totalSize = 0;
-      let downloadedSize = 0;
-      video.on('info', (info) => {
-        totalSize = info.formats[0].contentLength;
+      // Max percentage downloaded
+      let maxPercentage = 0;
+
+      // Emit the download progress event
+      video.on("progress", (chunkLength, downloaded, total) => {
+        // Calculate the percentage downloaded
+        const progress = Math.round((downloaded / total) * 100);
+
+        // Check if the percentage downloaded is greater than the max percentage
+        maxPercentage = Math.max(maxPercentage, progress);
+
+        // Emit the download progress event
+        socket.emit("download-progress", { progress });
       });
-      video.on('data', (chunk) => {
-        downloadedSize += chunk.length;
-        const progress = Math.round(downloadedSize / totalSize * 100);
-        socket.emit('download-progress', { progress });
-      });
-      video.on('end', () => {
-        console.log('Download complete:', url);
-        socket.emit('download-complete', { filename, thumbnail, title, FinishedName });
+
+      // Emit the download complete event
+      video.on("end", () => {
+        console.log("Download complete:", url);
+        socket.emit("download-complete", {
+          filename,
+          thumbnail,
+          title,
+          FinishedName,
+        });
 
         // Delete the file after 5 minutes
         const deleteTime = 20 * 60 * 1000; // 20 minutes in milliseconds
         setTimeout(() => {
           fs.unlink(filename, (err) => {
             if (err) {
-              if (err.syscall === 'unlink') {
-                console.log('Could not find file to delete:', filename);
+              if (err.syscall === "unlink") {
+                console.log("Could not find file to delete:", filename);
                 return;
-              }
-              else {
+              } else {
                 console.error(`Error deleting file ${filename}:`, err);
               }
             } else {
@@ -156,18 +175,18 @@ io.on('connection', function (socket) {
               console.log(`File auto-deleted: ${filename}`);
 
               // Notify the client that the file was deleted
-              socket.emit('download-auto-deleted', { filename });
+              socket.emit("download-auto-deleted", { filename });
             }
           });
         }, deleteTime);
       });
     } catch (err) {
       // Remove any elements that could be used for XSS
-      err.message = err.message.replace(/<|>/g, '');
+      err.message = err.message.replace(/<|>/g, "");
 
       // Emit the download error event
-      socket.emit('download-error', { error: err.message });
-      console.error('Error:', err.message);
+      socket.emit("download-error", { error: err.message });
+      console.error("Error:", err.message);
       return;
     }
   });
@@ -178,13 +197,20 @@ app.use("/", indexRouter);
 
 // 404 middleware
 app.use((req, res) => {
-  res.status(404).render('404', { matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
+  res
+    .status(404)
+    .render("404", { matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
 });
 
 // Error handling middleware
 app.use((err, req, res) => {
   console.error(err.stack);
-  res.render('index', { error: err.message, version: currentVersion, matomo: MATOMO, gaTrackingId: GA_TRACKING_ID });
+  res.render("index", {
+    error: err.message,
+    version: currentVersion,
+    matomo: MATOMO,
+    gaTrackingId: GA_TRACKING_ID,
+  });
 });
 
 /**
@@ -194,7 +220,9 @@ app.use((err, req, res) => {
  */
 async function getReleases() {
   // Get the releases from GitHub
-  const response = await fetch('https://api.github.com/repos/tyler-Github/YasifysTools/releases');
+  const response = await fetch(
+    "https://api.github.com/repos/tyler-Github/YasifysTools/releases"
+  );
 
   // Parse the response as JSON
   const data = await response.json();
@@ -208,10 +236,10 @@ server.listen(app_port, async () => {
   // Log the server URL and port
   console.log(`Server started: ${app_url}:${app_port}`);
 
-  console.log('Checking for updates...');
+  console.log("Checking for updates...");
   try {
     // Get the releases from GitHub
-    vLog('Getting releases from GitHub...');
+    vLog("Getting releases from GitHub...");
     const releases = await getReleases();
 
     // Get the latest version
@@ -225,10 +253,10 @@ server.listen(app_port, async () => {
     if (semver.gt(latestVersion, currentVersion)) {
       console.log(`Update available: ${currentVersion} -> ${latestVersion}`);
     } else {
-      console.log('Yasifys Tools is up to date');
+      console.log("Yasifys Tools is up to date");
     }
   } catch (err) {
     // Return if there is an error
-    console.error('Error:', err);
+    console.error("Error:", err);
   }
 });
