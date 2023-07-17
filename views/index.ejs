@@ -293,6 +293,11 @@
         console.log("Client connected to server.");
       });
 
+      // Loss of connection to server
+      socket.on("disconnect", function () {
+        console.log("Client disconnected from server.");
+      });
+
       // Download video
       function downloadVideo() {
         const url = document.getElementById("video-url").value;
@@ -326,7 +331,6 @@
       // Listen for download progress
       socket.on("download-progress", function (data) {
         const progress = data.progress;
-        console.log("Downloading: " + progress + "%");
         const progressBar = document.getElementById("progress-bar");
         progressBar.value = progress;
         progressBar.innerHTML = progress + "%";
