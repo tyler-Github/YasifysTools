@@ -121,9 +121,11 @@ io.on("connection", function (socket) {
 
       // Check if the file already exists
       if (fs.existsSync(filename)) {
-        // This is a tempory fix, we will keep everyone updated on if this fixes the current downloadinf issues.
+        // This is a temporary fix, we will keep everyone updated on if this fixes the current downloading issues.
         // Emit the download complete event
-        console.log("File already exists:", filename);
+        console.warn(
+          `File already exists: ${filename}, but we are going to download it anyways.`
+        );
         //socket.emit('download-complete', { filename, thumbnail, title, FinishedName });
         // return;
       }
