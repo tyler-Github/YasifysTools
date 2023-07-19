@@ -14,6 +14,13 @@ const fs = require("fs");
 // Load environment variables
 require("dotenv").config();
 
+// Create folder if it doesn't exist
+beforeAll(() => {
+  if (!fs.existsSync("./jest-test-area")) {
+    fs.mkdirSync("./jest-test-area");
+  }
+});
+
 describe("isValidFilename", () => {
   // Test valid filenames
   it("returns true for valid filenames", () => {
