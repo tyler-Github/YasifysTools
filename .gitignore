@@ -134,3 +134,6 @@ dist
 
 # Sonar Qube
 .scannerwork/
+
+# Test Area for jest
+jest-test-area/
