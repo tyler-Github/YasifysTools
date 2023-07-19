@@ -10,12 +10,22 @@ const fetch = require("node-fetch");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const { slug, vLog } = require("./helpers/helpers");
+const rateLimit = require("express-rate-limit");
 
 // Load environment variables
 require("dotenv").config();
 
 // Create Express app
 const app = express();
+
+// Configure rate limiter
+const apiLimiter = rateLimit({
+  windowMs: 2 * 60 * 1000,
+  max: 60,
+});
+
+// Apply rate limiting to all requests
+app.use(apiLimiter);
 
 // Disable X-Powered-By header
 app.use(helmet.hidePoweredBy());
