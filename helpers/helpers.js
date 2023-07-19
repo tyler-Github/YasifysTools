@@ -1,4 +1,9 @@
+// Description: Helper functions for the application
 const fs = require("fs");
+require("dotenv").config();
+
+// Set global variables
+const app_verbose = process.env.APP_VERBOSE;
 
 /**
  * Checks if a filename is valid.
@@ -77,6 +82,32 @@ const moveFile = (oldPath, newPath) => {
   });
 };
 
+/**
+ * Sanitize a string to be used as a filename
+ * @param {string} str The string to sanitize
+ * @returns {string} The sanitized string
+ */
+const slug = (str) =>
+  str
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s/g, "-");
+
+/**
+ * Verbose Console Log
+ * @param message - The message to log
+ */
+const vLog = (message) => {
+  // Check if verbose logging is enabled
+  if (app_verbose == true || app_verbose == "true") {
+    // Append a [V] to the beginning of the message to indicate verbose logging
+    message = `[VERBOSE] ${message}`;
+
+    // Log the message
+    console.log(message);
+  }
+};
+
 module.exports = {
   isValidFilename,
   getExtension,
@@ -84,4 +115,6 @@ module.exports = {
   getRandomFilename,
   deleteFile,
   moveFile,
+  slug,
+  vLog,
 };

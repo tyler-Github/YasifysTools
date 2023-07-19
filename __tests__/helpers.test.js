@@ -6,6 +6,7 @@ const {
   getRandomFilename,
   deleteFile,
   moveFile,
+  slug,
 } = require("../helpers/helpers");
 
 // Load filesystem module
@@ -106,5 +107,13 @@ describe("moveFile", () => {
 
     // Delete test file
     fs.unlinkSync(newPath);
+  });
+});
+
+// Tests for slug helper
+describe("slug", () => {
+  // Test slugifying a string
+  it("slugifies the string", () => {
+    expect(slug("Hello World")).toBe("hello-world");
   });
 });

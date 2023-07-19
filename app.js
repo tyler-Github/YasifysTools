@@ -9,6 +9,7 @@ const semver = require("semver");
 const fetch = require("node-fetch");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
+const { slug, vLog } = require("./helpers/helpers");
 
 // Load environment variables
 require("dotenv").config();
@@ -22,7 +23,6 @@ app.use(helmet.hidePoweredBy());
 // Set global variables
 const app_url = process.env.APP_URL || "http://localhost";
 const app_port = process.env.APP_PORT || 3000;
-const app_verbose = process.env.APP_VERBOSE;
 const currentVersion = process.env.npm_package_version;
 var MATOMO = null;
 
@@ -75,28 +75,6 @@ const io = new Server(server);
 
 // Routers
 var indexRouter = require("./routes/index");
-
-/**
- * Sanitize a string to be used as a filename
- * @param {string} str The string to sanitize
- * @returns {string} The sanitized string
- */
-const slug = (str) => str.replace(/[^a-zA-Z0-9\s-]/g, "");
-
-/**
- * Verbose Console Log
- * @param message - The message to log
- */
-const vLog = (message) => {
-  // Check if verbose logging is enabled
-  if (app_verbose == true || app_verbose == "true") {
-    // Append a [V] to the beginning of the message to indicate verbose logging
-    message = `[VERBOSE] ${message}`;
-
-    // Log the message
-    console.log(message);
-  }
-};
 
 // Socket.io events
 io.on("connection", function (socket) {
