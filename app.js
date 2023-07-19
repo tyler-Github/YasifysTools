@@ -60,10 +60,7 @@ mongoose
     }
   )
   .then(() => {
-    console.log(
-      "Connected to MongoDB Database:",
-      process.env.DB_DATABASE || "YasifysTools"
-    );
+    vLog(`Connected to MongoDB Database: ${process.env.DB_DATABASE || "YasifysTools"}`);
   })
   .catch((error) => {
     console.error("Error connecting to MongoDB:", error);
