@@ -16,6 +16,7 @@
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "helmet": "^7.0.0",
     "mongoose": "^7.3.4",
     "node-fetch": "^2.6.11",
     "sanitize-filename": "^1.6.3",
