@@ -8,12 +8,16 @@ const { Server } = require("socket.io");
 const semver = require("semver");
 const fetch = require("node-fetch");
 const mongoose = require("mongoose");
+const helmet = require("helmet");
 
 // Load environment variables
 require("dotenv").config();
 
 // Create Express app
 const app = express();
+
+// Disable X-Powered-By header
+app.use(helmet.hidePoweredBy());
 
 // Set global variables
 const app_url = process.env.APP_URL || "http://localhost";
