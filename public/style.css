@@ -1,0 +1,231 @@
+/* Common styles for both light and dark modes */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.embed-responsive-16by9 {
+    max-height: 400px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    background-color: #fff;
+    border: none;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.form-control {
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+    padding: 0 20px;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
+
+.btn-primary {
+    background-color: #f00;
+    border: none;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 30px;
+    margin-left: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #d00;
+}
+
+.progress {
+    height: 20px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    background-color: #f00;
+    transition: width 0.5s ease-in-out;
+}
+
+.card-img-top {
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.card-text {
+    margin-top: 20px;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.btn-success {
+    background-color: #f00;
+    border: none;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 30px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-success:hover {
+    background-color: #d00;
+}
+
+#progress-bar {
+    transition: width 1s ease-in-out;
+}
+
+.bg-youtube {
+    background-color: #ff0000;
+}
+
+.bg-youtube .progress-bar {
+    background-color: #ffffff;
+}
+
+/* Dark mode */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #111;
+}
+
+.navbar.dark-mode {
+    background-color: #1a1a1a;
+    color: #111;
+}
+
+.container-fluid.dark-mode {
+    background-color: #1a1a1a;
+    color: #111;
+}
+
+.bg-danger.dark-mode {
+    background-color: #181818 !important;
+    color: #111;
+}
+
+.navbar-dark.dark-mode {
+    background-color: #1a1a1a;
+    color: #111;
+}
+
+.dropdown-menu.dark-mode {
+    background-color: #1a1a1a;
+    color: #111;
+}
+
+.dropdown-item.dark-mode {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.navbar-expand-lg.dark-mode {
+    background-color: #1a1a1a;
+    color: #111;
+}
+
+.alert-warning.dark-mode {
+    background-color: #483f06 !important;
+    color: #ffffff;
+}
+
+.card.dark-mode {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: #222121;
+}
+
+.card-header.dark-mode {
+    background-color: #222121;
+    border-bottom: 1px solid #444;
+}
+
+.card-title.dark-mode {
+    color: #f9f9f9;
+}
+
+.card-body.dark-mode {
+    color: #f9f9f9;
+}
+
+.form-control.dark-mode {
+    background-color: #222;
+    color: #f9f9f9;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.form-control.dark-mode:focus {
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
+
+.btn-primary.dark-mode {
+    background-color: rgb(108, 5, 5);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary.dark-mode:hover {
+    background-color: rgb(68, 3, 3);
+}
+
+.progress.dark-mode {
+    box-shadow: inset 0 -1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar.dark-mode {
+    background-color: rgb(77, 3, 3);
+}
+
+.card-img-top.dark-mode {
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.card-text.dark-mode {
+    color: #f9f9f9;
+}
+
+.btn-success.dark-mode {
+    background-color: rgb(82, 6, 6);
+}
+
+.btn-success.dark-mode:hover {
+    background-color: rgb(67, 3, 3);
+}
+
+.bg-youtube.dark-mode {
+    background-color: #440202;
+}
+
+.bg-youtube.dark-mode .progress-bar {
+    background-color: #f9f9f9;
+}
