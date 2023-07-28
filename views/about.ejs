@@ -150,10 +150,10 @@
       // Save the dark mode preference to localStorage
       if (body.classList.contains('dark-mode')) {
         localStorage.setItem('darkModePreference', 'dark');
-        darkModeButton.textContent = "Toggle Light Mode";
+        darkModeButton.innerHTML = "<i class='fas fa-sun'></i>";
       } else {
         localStorage.setItem('darkModePreference', 'light');
-        darkModeButton.textContent = "Toggle Dark Mode";
+        darkModeButton.innerHTML = "<i class='fas fa-moon'></i>";
       }
 
       // Get all elements with class attribute
@@ -181,7 +181,7 @@
           }
         });
         body.classList.toggle('dark-mode');
-        darkModeButton.textContent = "Toggle Light Mode";
+        darkModeButton.innerHTML = "<i class='fas fa-sun'></i>";
       }
 
       if (darkModePreference === 'light') {
@@ -191,7 +191,7 @@
           }
         });
         body.classList.toggle('light-mode');
-        darkModeButton.textContent = "Toggle Light Mode";
+        darkModeButton.innerHTML = "<i class='fas fa-sun'></i>";
       }
     });
   </script>
