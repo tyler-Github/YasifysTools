@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -201,6 +202,9 @@
             <a class="nav-link" href="/about">About</a>
           </li>
           <li class="nav-item">
+            <a id="darkModeToggle" href="#" class="nav-link" onclick="toggleDarkMode()">Toggle Dark Mode</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="https://github.com/tyler-Github/YasifysTools" target="_blank">GitHub</a>
           </li>
         </ul>
@@ -314,6 +318,61 @@
         }, 1000);
       }
     }, 100);
+
+    function toggleDarkMode() {
+      const body = document.body;
+      const darkModeButton = document.getElementById("darkModeToggle");
+
+      // Toggle the dark-mode class on the body element
+      body.classList.toggle('dark-mode');
+
+      // Save the dark mode preference to localStorage
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkModePreference', 'dark');
+        darkModeButton.innerHTML = "<i class='fas fa-sun'></i>";
+      } else {
+        localStorage.setItem('darkModePreference', 'light');
+        darkModeButton.innerHTML = "<i class='fas fa-moon'></i>";
+      }
+
+      // Get all elements with class attribute
+      const elementsWithClass = document.querySelectorAll('*[class]');
+
+      // Loop through each element with class and toggle dark-mode
+      elementsWithClass.forEach(element => {
+        if (element !== body) {
+          element.classList.toggle('dark-mode');
+        }
+      });
+    }
+
+    // Check for dark mode preference on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      const darkModePreference = localStorage.getItem('darkModePreference');
+      const body = document.body;
+      const darkModeButton = document.getElementById("darkModeToggle");
+      const elementsWithClass = document.querySelectorAll('*[class]');
+
+      if (darkModePreference === 'dark') {
+        elementsWithClass.forEach(element => {
+          if (element !== body) {
+            element.classList.toggle('dark-mode');
+          }
+        });
+        body.classList.toggle('dark-mode');
+        darkModeButton.innerHTML = "<i class='fas fa-sun'></i>";
+      }
+
+      if (darkModePreference === 'light') {
+        elementsWithClass.forEach(element => {
+          if (element !== body) {
+            element.classList.toggle('light-mode');
+          }
+        });
+        body.classList.toggle('light-mode');
+        darkModeButton.innerHTML = "<i class='fas fa-sun'></i>";
+      }
+    });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
