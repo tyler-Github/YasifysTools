@@ -35,11 +35,11 @@ pipeline:
       - npm test --coverage
 
   - name: SonarQube Scan
-    image: sonarsource/sonar-scanner-cli
+    image: sonarsource/sonar-scanner-cli:4.8.0
     environment:
       SONAR_HOST_URL: "https://sonar.vahngomes.dev"
     commands:
-      - sonar-scanner --add-opens java.base/java.lang=ALL-UNNAMED
+      - sonar-scanner
 
   - name: Deploy to Docker Hub
     image: *buildx_image
