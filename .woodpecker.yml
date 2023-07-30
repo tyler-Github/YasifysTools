@@ -39,7 +39,7 @@ pipeline:
     environment:
       SONAR_HOST_URL: "https://sonar.vahngomes.dev"
     commands:
-      - sonar-scanner
+      - sonar-scanner --add-opens java.base/java.lang=ALL-UNNAMED
 
   - name: Deploy to Docker Hub
     image: *buildx_image
