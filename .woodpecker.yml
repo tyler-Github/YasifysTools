@@ -36,6 +36,7 @@ pipeline:
 
   - name: SonarQube Scan
     image: sonarsource/sonar-scanner-cli:4.8.0
+    secrets: [sonar_token]
     environment:
       SONAR_HOST_URL: "https://sonar.vahngomes.dev"
     commands:
