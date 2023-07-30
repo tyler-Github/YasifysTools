@@ -35,7 +35,7 @@ pipeline:
       - npm test --coverage
 
   - name: SonarQube Scan
-    image: SonarSource/sonar-scanner-cli:latest
+    image: sonarqube/sonarqube-cli
     environment:
       SONAR_HOST_URL: "https://sonar.vahngomes.dev"
     commands:
