@@ -106,6 +106,10 @@
     </div>
   </nav>
 
+  <div id="countdown" class="alert alert-warning" role="alert">
+    Video will be deleted in: 20:00
+  </div>
+
   <div class="container my-5">
     <div class="row justify-content-center">
       <div class="col-md-8">
@@ -130,6 +134,40 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
   <script>
+
+    // Calculate the end time based on the saved start time and 20 minutes
+    const savedStartTime = localStorage.getItem("videoStartTime");
+    const startTime = savedStartTime ? parseInt(savedStartTime) : new Date().getTime();
+    const endTime = startTime + 20 * 60 * 1000;
+
+    // Get the countdown element
+    const countdownElement = document.getElementById("countdown");
+
+    // Function to update the countdown
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeRemaining = endTime - now;
+      const minutes = Math.floor(timeRemaining / 60000);
+      const seconds = Math.floor((timeRemaining % 60000) / 1000);
+      const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      countdownElement.textContent = `Video will be deleted in: ${formattedTime}`;
+
+      if (timeRemaining <= 0) {
+        countdownElement.textContent = "Video has been deleted.";
+
+        // Remove the saved start time from localStorage
+        localStorage.removeItem("videoStartTime");
+
+        clearInterval(countdownInterval);
+      }
+    }
+
+    // Initial update of the countdown
+    updateCountdown();
+
+    // Update the countdown every second
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
     function toggleDarkMode() {
       const body = document.body;
       const darkModeButton = document.getElementById("darkModeToggle");
