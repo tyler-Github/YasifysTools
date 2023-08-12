@@ -150,7 +150,7 @@
 
 
   <script src="/socket.io/socket.io.js"></script>
-  <script>
+   <script>
     var socket = io();
 
     // Connect to server
@@ -209,22 +209,47 @@
     socket.on("download-complete", function (data) {
       const { filename, thumbnail, title, FinishedName } = data;
       document.getElementById("download-status").innerHTML = `
+      <div id="countdown" class="alert alert-warning" role="alert">
+        Video will be deleted in: 20:00
+     </div>
         <div class="card ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">
           <img src="${thumbnail}" class="card-img-top ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}" alt="${title}">
           <div class="card-body ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">
             <h5 class="card-title ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">${title}</h5>
             <p class="card-text ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Download complete!</p>
-            <div id="video-options">
-              <a href="download?url=${FinishedName}" onclick="VideoDownloaded()" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Download (20 min)</a>
-              <a href="player?url=${FinishedName}&title=${title}" id="player-button" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Play (20 min)</a>
-            </div>
-            <div id="downloaded-by-user" style="display: none;">
-              <hr />
-              <p class="card-text ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">This video has been downloaded by you. And now has been removed from the server.</p>
-            </div>
+            <a href="download?url=${FinishedName}" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Download (20 min)</a>
+            <a href="player?url=${FinishedName}&title=${title}" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Play (20 min)</a>
           </div>
         </div>
       `;
+      // Calculate the end time based on the saved start time and 20 minutes
+      const savedStartTime = localStorage.getItem("videoStartTime");
+      const startTime = savedStartTime ? parseInt(savedStartTime) : new Date().getTime();
+      const endTime = startTime + 20 * 60 * 1000;
+
+      // Update the countdown every second
+      const countdownElement = document.getElementById("countdown");
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const timeRemaining = endTime - now;
+        const minutes = Math.floor(timeRemaining / 60000);
+        const seconds = Math.floor((timeRemaining % 60000) / 1000);
+        const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        countdownElement.textContent = `Video will be deleted in: ${formattedTime}`;
+
+        if (timeRemaining <= 0) {
+          countdownElement.textContent = "Video has been deleted.";
+          clearInterval(countdownInterval);
+        }
+      }
+
+      updateCountdown();
+      const countdownInterval = setInterval(updateCountdown, 1000);
+
+      // Save the start time to localStorage
+      localStorage.setItem("videoStartTime", startTime.toString());
+
     });
 
     // Update progress bar every 100ms
@@ -256,6 +281,8 @@
       }
     }, 100);
 
+
+
     function toggleDarkMode() {
       const body = document.body;
       const darkModeButton = document.getElementById("darkModeToggle");
@@ -281,14 +308,6 @@
           element.classList.toggle('dark-mode');
         }
       });
-    }
-
-    function VideoDownloaded() {
-      // Hide the download and play buttons
-      document.getElementById("video-options").style.display = "none";
-
-      // Show the downloaded by user message
-      document.getElementById("downloaded-by-user").style.display = "block";
     }
 
     // Check for dark mode preference on page load
