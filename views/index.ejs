@@ -146,7 +146,7 @@
       </div>
     </div>
   </div>
-  
+
 
 
   <script src="/socket.io/socket.io.js"></script>
@@ -214,8 +214,14 @@
           <div class="card-body ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">
             <h5 class="card-title ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">${title}</h5>
             <p class="card-text ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Download complete!</p>
-            <a href="download?url=${FinishedName}" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Download (20 min)</a>
-            <a href="player?url=${FinishedName}&title=${title}" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Play (20 min)</a>
+            <div id="video-options">
+              <a href="download?url=${FinishedName}" onclick="VideoDownloaded()" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Download (20 min)</a>
+              <a href="player?url=${FinishedName}&title=${title}" id="player-button" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Play (20 min)</a>
+            </div>
+            <div id="downloaded-by-user" style="display: none;">
+              <hr />
+              <p class="card-text ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">This video has been downloaded by you. And now has been removed from the server.</p>
+            </div>
           </div>
         </div>
       `;
@@ -275,6 +281,14 @@
           element.classList.toggle('dark-mode');
         }
       });
+    }
+
+    function VideoDownloaded() {
+      // Hide the download and play buttons
+      document.getElementById("video-options").style.display = "none";
+
+      // Show the downloaded by user message
+      document.getElementById("downloaded-by-user").style.display = "block";
     }
 
     // Check for dark mode preference on page load
