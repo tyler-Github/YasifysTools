@@ -85,7 +85,7 @@ var indexRouter = require("./routes/index");
 
 // Socket.io events
 io.on("connection", function (socket) {
-  socket.on("download-video", async function (url) {
+  socket.on("download-video", async function (url, quality) {
     console.log("Starting download:", url);
 
     try {
@@ -120,7 +120,8 @@ io.on("connection", function (socket) {
       }
 
       // Download the video
-      const video = ytdl(url, { filter: "audioandvideo", quality: "highest" });
+      const video = ytdl(url, { filter: "audioandvideo", quality: quality });
+      console.log(quality)
       video.pipe(fs.createWriteStream(filename));
 
       // Max percentage downloaded
