@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Cache = require("../schemas/Cache"); // Assuming the Cache schema is defined in a file named "Cache.js"
 const { ActivityLog, obfuscateIPAddress } = require("../schemas/ActivityLog"); // Assuming the ActivityLog schema is defined in a file named "ActivityLog.js"
+const DownloadExpiration = require("../schemas/DownloadExpiration"); // Assuming the DownloadExpiration schema is defined in a file named "DownloadExpiration.js"
 
 // Load environment variables
 require("dotenv").config();
@@ -98,6 +99,49 @@ describe("Activity Log Schema", () => {
     let error;
     try {
       await activityLogEntry.save();
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error).toBeDefined();
+    expect(error.name).toBe("ValidationError");
+  });
+});
+
+describe("Download DownloadExpiration Schema", () => {
+  // Test case 1: Creating a download expiration entry
+  it("should create a new expiration document", async () => {
+    const expiration = {
+      videoId: "abc123",
+      source: "youtube",
+      userHash: "user123",
+      expiresAt: new Date(Date.now() + 20 * 60 * 1000), // 20 minutes from now
+    };
+
+    const expirationEntry = new DownloadExpiration(expiration);
+    const savedExpirationEntry = await expirationEntry.save();
+
+    expect(savedExpirationEntry._id).toBeDefined();
+    expect(savedExpirationEntry.videoId).toBe(expiration.videoId);
+    expect(savedExpirationEntry.source).toBe(expiration.source);
+    expect(savedExpirationEntry.userHash).toBe(expiration.userHash);
+    expect(savedExpirationEntry.expiresAt).toEqual(expiration.expiresAt);
+    expect(savedExpirationEntry.timestamp).toBeDefined();
+  });
+
+  // Test case 2: Attempting to create a download expiration entry without a required field
+  it("should not create a new expiration document without a required field", async () => {
+    const invalidExpiration = {
+      videoId: "abc123",
+      source: "youtube",
+      expiresAt: new Date(Date.now() + 20 * 60 * 1000), // 20 minutes from now
+    };
+
+    const expirationEntry = new DownloadExpiration(invalidExpiration);
+
+    let error;
+    try {
+      await expirationEntry.save();
     } catch (err) {
       error = err;
     }
