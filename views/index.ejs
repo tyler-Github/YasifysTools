@@ -128,6 +128,14 @@
             <div class="input-group mb-3">
               <input type="text" class="form-control" pattern="https?://.+" id="video-url"
                 placeholder="Enter YouTube video URL" />
+              <select class="form-select" id="quality-options">
+                <option value="highest">Highest</option>
+                <option value="lowest">Lowest</option>
+                <option value="highestaudio">Highest Audio</option>
+                <option value="lowestaudio">Lowest Audio</option>
+                <option value="highestvideo">Highest Video</option>
+                <option value="lowestvideo">Lowest Video</option>
+              </select>
               <button type="button" class="btn btn-primary" onclick="downloadVideo()">
                 Download
               </button>
@@ -138,6 +146,8 @@
       </div>
     </div>
   </div>
+  
+
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
@@ -158,7 +168,9 @@
       const url = document.getElementById("video-url").value;
       if (!url) return;
 
-      socket.emit("download-video", url);
+      const selectedQuality = document.getElementById("quality-options").value;
+
+      socket.emit("download-video", url, selectedQuality);
       document.getElementById("download-status").innerHTML = `
   <div class="card ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">
     <div class="card-body ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">
@@ -202,8 +214,8 @@
           <div class="card-body ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">
             <h5 class="card-title ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">${title}</h5>
             <p class="card-text ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Download complete!</p>
-            <a href="download?url=${FinishedName}" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Download (5 min)</a>
-            <a href="player?url=${FinishedName}&title=${title}" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Play (5 min)</a>
+            <a href="download?url=${FinishedName}" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Download (20 min)</a>
+            <a href="player?url=${FinishedName}&title=${title}" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Play (20 min)</a>
           </div>
         </div>
       `;
