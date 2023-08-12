@@ -108,7 +108,7 @@ describe("Activity Log Schema", () => {
   });
 });
 
-describe("Download DownloadExpiration Schema", () => {
+describe("Download Expiration Schema", () => {
   // Test case 1: Creating a download expiration entry
   it("should create a new expiration document", async () => {
     const expiration = {
