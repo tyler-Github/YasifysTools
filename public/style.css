@@ -58,6 +58,24 @@ body {
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+.form-select {
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+    padding: 0 20px;
+    background-color: #fff;
+    color: #333;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.form-select.dark-mode {
+    background-color: #222;
+    color: #f9f9f9;
+}
+
+
 .btn-primary:hover {
     background-color: #d00;
 }
