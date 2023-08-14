@@ -17,4 +17,7 @@ router.get('/download', handlers.downloadVideo);
 // Route for rendering the player page
 router.get('/player', handlers.renderPlayerPage);
 
+// Route for rendering the settings page
+router.get('/settings', handlers.renderSettingsPage);
+
 module.exports = router;
