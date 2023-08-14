@@ -34,6 +34,20 @@ exports.renderHomePage = (req, res) => {
   });
 };
 
+// Handler function for rendering the settings page
+exports.renderSettingsPage = (req, res) => {
+  res.render("settings", {
+    error: null,
+    title: null,
+    thumbnail: null,
+    filename: null,
+    FinishedName: null,
+    version: process.env.npm_package_version,
+    matomo: MATOMO,
+    gaTrackingId: GA_TRACKING_ID,
+  });
+};
+
 // Handler function for rendering the about page
 exports.renderAboutPage = (req, res) => {
   res.render("about", {
