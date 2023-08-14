@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Settings - Yasifys YouTube Downloader</title>
+    <meta name="description"
+        content="Yasifys is a free online tool for downloading videos from popular video sharing websites, including YouTube, TikTok, Facebook, and more." />
+    <meta name="keywords" content="YouTube downloader, TikTok downloader, Facebook downloader, video downloader" />
+    <link rel="canonical" href="https://www.yasifys.tk/settings" />
+    <meta property="og:title" content="Settings - Yasifys YouTube Downloader" />
+    <meta property="og:description"
+        content="Yasifys is a free online tool for downloading videos from popular video sharing websites, including YouTube, TikTok, Facebook, and more." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.yasifys.tk/settings" />
+    <meta property="og:image" content="https://www.yasifys.tk/assets/img/meta/Card.png" />
+    <meta property="og:image:alt" content="Yasifys logo" />
+    <meta property="og:site_name" content="Yasifys" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Settings - Yasifys YouTube Downloader" />
+    <meta name="twitter:description"
+        content="Yasifys is a free online tool for downloading videos from popular video sharing websites, including YouTube, TikTok, Facebook, and more." />
+    <meta name="twitter:image" content="https://www.yasifys.tk/assets/img/meta/Card.png" />
+    <meta name="twitter:image:alt" content="Yasifys logo" />
+
+    <link rel="icon" type="image/png" href="/favicon/favicon32x32.png" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" />
+    <link id="page-stylesheet" rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <% if (matomo) { %>
+        <!-- Matomo -->
+        <script>
+            var _paq = (window._paq = window._paq || []);
+            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+            _paq.push(["trackPageView"]);
+            _paq.push(["enableLinkTracking"]);
+            (function () {
+                var u = "<%- matomo.URL %>";
+                if (u.substr(-1) !== "/") {
+                    u += "/";
+                }
+                _paq.push(["setTrackerUrl", u + "matomo.php"]);
+                _paq.push(["setSiteId", "<%- matomo.SITE_ID %>"]);
+                var d = document,
+                    g = d.createElement("script"),
+                    s = d.getElementsByTagName("script")[0];
+                g.async = true;
+                g.src = u + "matomo.js";
+                s.parentNode.insertBefore(g, s);
+            })();
+        </script>
+        <!-- End Matomo Code -->
+        <% } %>
+</head>
+
+<body lang="en-GB" class="test">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Yasifys
+                <span id="version" class="badge bg-light text-dark">v<%= version %></span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Tools
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="/tiktok">TikTok Downloader</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Instagram Downloader</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Facebook Downloader</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/tyler-Github/YasifysTools"
+                            target="_blank">GitHub</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/settings">Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="darkModeToggle" href="#" class="nav-link" onclick="toggleDarkMode()"><i
+                                class='fas fa-moon'></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-center">Settings</h1>
+                    </div>
+                    <div class="card-body">
+                        <input type="file" id="stylesheet-upload" accept=".css" class="form-control">
+                        <br>
+                        <button class="btn btn-primary" onclick="uploadStylesheet()">Upload Stylesheet</button>
+                        <button class="btn btn-primary" onclick="revertToDefault()">Revert to Default</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            const darkModeButton = document.getElementById("darkModeToggle");
+
+            // Toggle the dark-mode class on the body element
+            body.classList.toggle('dark-mode');
+
+            // Save the dark mode preference to localStorage
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkModePreference', 'dark');
+                darkModeButton.innerHTML = "<i class='fas fa-sun'></i>";
+            } else {
+                localStorage.setItem('darkModePreference', 'light');
+                darkModeButton.innerHTML = "<i class='fas fa-moon'></i>";
+            }
+
+            // Get all elements with class attribute
+            const elementsWithClass = document.querySelectorAll('*[class]');
+
+            // Loop through each element with class and toggle dark-mode
+            elementsWithClass.forEach(element => {
+                if (element !== body) {
+                    element.classList.toggle('dark-mode');
+                }
+            });
+        }
+
+        // Check for dark mode preference on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            const darkModePreference = localStorage.getItem('darkModePreference');
+            const body = document.body;
+            const darkModeButton = document.getElementById("darkModeToggle");
+            const elementsWithClass = document.querySelectorAll('*[class]');
+
+            if (darkModePreference === 'dark') {
+                elementsWithClass.forEach(element => {
+                    if (element !== body) {
+                        element.classList.toggle('dark-mode');
+                    }
+                });
+                body.classList.toggle('dark-mode');
+                darkModeButton.innerHTML = "<i class='fas fa-sun'></i>";
+            }
+
+            if (darkModePreference === 'light') {
+                elementsWithClass.forEach(element => {
+                    if (element !== body) {
+                        element.classList.toggle('light-mode');
+                    }
+                });
+                body.classList.toggle('light-mode');
+                darkModeButton.innerHTML = "<i class='fas fa-moon'></i>";
+            }
+        });
+
+        function uploadStylesheet() {
+            const fileInput = document.getElementById('stylesheet-upload');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    localStorage.setItem('customStylesheet', e.target.result);
+                    alert('Stylesheet uploaded successfully!');
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        const customStylesheet = localStorage.getItem('customStylesheet');
+        if (customStylesheet) {
+            const styleTag = document.createElement('style');
+            styleTag.innerHTML = customStylesheet;
+            document.head.appendChild(styleTag);
+            document.getElementById('page-stylesheet').remove();
+        }
+
+        function revertToDefault() {
+            const customStylesheet = document.querySelector('style[data-custom-stylesheet]');
+            if (customStylesheet) {
+                customStylesheet.remove();
+            }
+
+            // Remove custom stylesheet data from local storage
+            localStorage.removeItem('customStylesheet');
+
+            // Refresh the page
+            location.reload();
+        }
+    </script>
+</body>
+
+</html>
