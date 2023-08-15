@@ -18,6 +18,11 @@ pipeline:
     commands:
       - npm install
 
+  - name: Generate version file
+    image: alpine/git
+    commands:
+      - git describe --always --tags --dirty > version
+
   - name: Lint
     image: *node_image
     commands:

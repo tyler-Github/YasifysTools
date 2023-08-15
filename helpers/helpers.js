@@ -108,6 +108,30 @@ const vLog = (message) => {
   }
 };
 
+/**
+ * Get the current version of the application
+ * @returns {string} The current version of the application
+ */
+const getVersion = () => {
+  var version = "unknown";
+  try {
+    version = fs.readFileSync("version", "utf8");
+    version = version.replace("v", "").trim();
+  } catch {
+    const { execSync } = require("child_process");
+    try {
+      version = execSync("git describe --always --tags --dirty").toString();
+      version = version.replace("v", "").trim();
+    } catch {
+      return process.env.npm_package_version;
+    }
+    fs.writeFileSync("version", version);
+    return version;
+  }
+
+  return version;
+};
+
 module.exports = {
   isValidFilename,
   getExtension,
@@ -117,4 +141,5 @@ module.exports = {
   moveFile,
   slug,
   vLog,
+  getVersion,
 };
