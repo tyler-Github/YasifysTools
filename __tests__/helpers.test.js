@@ -7,7 +7,7 @@ const {
   deleteFile,
   moveFile,
   slug,
-  getVersion(),
+  getVersion,
 } = require("../helpers/helpers");
 
 // Load filesystem module
