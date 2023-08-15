@@ -114,22 +114,18 @@ const vLog = (message) => {
  */
 const getVersion = () => {
   var version = "unknown";
-
-  // Try to read the version file
   try {
     version = fs.readFileSync("version", "utf8");
+    version = version.replace("v", "").trim();
   } catch {
-    // Attempt to run git describe --always --tags --dirty
     const { execSync } = require("child_process");
     try {
       version = execSync("git describe --always --tags --dirty").toString();
+      version = version.replace("v", "").trim();
     } catch {
       return process.env.npm_package_version;
     }
-
-    // Write the version to the version file
     fs.writeFileSync("version", version);
-
     return version;
   }
 
