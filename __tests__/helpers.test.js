@@ -7,7 +7,7 @@ const {
   deleteFile,
   moveFile,
   slug,
-  getVersion,
+  getVersion(),
 } = require("../helpers/helpers");
 
 // Load filesystem module
@@ -120,10 +120,10 @@ describe("slug", () => {
 });
 
 // Tests for getting version
-describe("getVersion", () => {
+describe("getVersion()", () => {
   // Test getting version
   it("gets the version", () => {
     // It should just return something
-    expect(getVersion()).toBeTruthy();
+    expect(getVersion()()).toBeTruthy();
   });
 });

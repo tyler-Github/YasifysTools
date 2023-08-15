@@ -9,7 +9,7 @@ const semver = require("semver");
 const fetch = require("node-fetch");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
-const { slug, vLog } = require("./helpers/helpers");
+const { slug, vLog, getVersion } = require("./helpers/helpers");
 const rateLimit = require("express-rate-limit");
 
 // Load environment variables
@@ -33,7 +33,7 @@ app.use(helmet.hidePoweredBy());
 // Set global variables
 const app_url = process.env.APP_URL || "http://localhost";
 const app_port = process.env.APP_PORT || 3000;
-const currentVersion = process.env.npm_package_version;
+const currentVersion = getVersion();
 var MATOMO = null;
 
 // Set up the Matomo and Google Analytics variables

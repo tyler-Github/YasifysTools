@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { getVersion } = require("../helpers/helpers");
 
 // Load environment variables
 require("dotenv").config();
@@ -28,7 +29,7 @@ exports.renderHomePage = (req, res) => {
     thumbnail: null,
     filename: null,
     FinishedName: null,
-    version: process.env.npm_package_version,
+    version: getVersion(),
     matomo: MATOMO,
     gaTrackingId: GA_TRACKING_ID,
   });
@@ -42,7 +43,7 @@ exports.renderSettingsPage = (req, res) => {
     thumbnail: null,
     filename: null,
     FinishedName: null,
-    version: process.env.npm_package_version,
+    version: getVersion(),
     matomo: MATOMO,
     gaTrackingId: GA_TRACKING_ID,
   });
@@ -51,7 +52,7 @@ exports.renderSettingsPage = (req, res) => {
 // Handler function for rendering the about page
 exports.renderAboutPage = (req, res) => {
   res.render("about", {
-    version: process.env.npm_package_version,
+    version: getVersion(),
     matomo: MATOMO,
     gaTrackingId: GA_TRACKING_ID,
   });
@@ -65,7 +66,7 @@ exports.renderTikTokPage = (req, res) => {
     thumbnail: null,
     filename: null,
     FinishedName: null,
-    version: process.env.npm_package_version,
+    version: getVersion(),
     matomo: MATOMO,
     gaTrackingId: GA_TRACKING_ID,
   });
@@ -138,7 +139,7 @@ exports.renderPlayerPage = (req, res) => {
   res.render("player", {
     url: filePath,
     title,
-    version: process.env.npm_package_version,
+    version: getVersion(),
     matomo: MATOMO,
     gaTrackingId: GA_TRACKING_ID,
   });
