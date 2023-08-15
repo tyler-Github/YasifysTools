@@ -124,6 +124,6 @@ describe("getVersion()", () => {
   // Test getting version
   it("gets the version", () => {
     // It should just return something
-    expect(getVersion()()).toBeTruthy();
+    expect(getVersion()).toBeTruthy();
   });
 });
