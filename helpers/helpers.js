@@ -120,7 +120,7 @@ const getVersion = () => {
   } catch {
     const { execSync } = require("child_process");
     try {
-      version = execSync("git describe --always --tags --dirty").toString();
+      version = execSync("git describe --always --tags").toString();
       version = version.replace("v", "").trim();
     } catch {
       return process.env.npm_package_version;

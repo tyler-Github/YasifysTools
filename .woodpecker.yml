@@ -21,7 +21,7 @@ pipeline:
   - name: Generate version file
     image: alpine/git
     commands:
-      - git describe --always --tags --dirty > version
+      - git describe --always --tags > version
 
   - name: Lint
     image: *node_image
