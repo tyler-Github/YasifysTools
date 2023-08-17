@@ -1,6 +1,6 @@
 {
   "name": "yasifys-tools",
-  "version": "1.3.0",
+  "version": "1.4.6",
   "description": "A website with tools to download videos from popular social media platforms.",
   "main": "app.js",
   "scripts": {
