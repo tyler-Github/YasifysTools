@@ -263,7 +263,7 @@ server.listen(app_port, async () => {
       }
     } else {
       console.log(
-        `Invalid version format: ${currentVersion}. Unable to check for updates.`
+        `Current pre-release: ${currentVersion}, not checking for updates`
       );
     }
   } catch (err) {
