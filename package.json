@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "live": "nodemon app.js"
   },
   "keywords": [],
   "author": "Tyler Github",
