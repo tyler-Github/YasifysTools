@@ -60,7 +60,11 @@ mongoose
     }
   )
   .then(() => {
-    vLog(`Connected to MongoDB Database: ${process.env.DB_DATABASE || "YasifysTools"}`);
+    vLog(
+      `Connected to MongoDB Database: ${
+        process.env.DB_DATABASE || "YasifysTools"
+      }`
+    );
   })
   .catch((error) => {
     console.error("Error connecting to MongoDB:", error);
@@ -123,7 +127,7 @@ io.on("connection", function (socket) {
 
       // Download the video
       const video = ytdl(url, { filter: "audioandvideo", quality: quality });
-      console.log(quality)
+      console.log(quality);
       video.pipe(fs.createWriteStream(filename));
 
       // Max percentage downloaded
@@ -242,7 +246,10 @@ server.listen(app_port, async () => {
     vLog(`Latest version: ${latestVersion}`);
 
     // Only do that if the current version is not a pre-release such as a git commit hash
-    if (semver.prerelease(currentVersion) === null) {
+    if (
+      semver.prerelease(currentVersion) === null &&
+      semver.valid(currentVersion)
+    ) {
       // Check if the current version is less than the latest version
       if (semver.gt(latestVersion, currentVersion)) {
         console.log(`Update available: ${currentVersion} -> ${latestVersion}`);
