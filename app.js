@@ -247,8 +247,7 @@ server.listen(app_port, async () => {
 
     // Only do that if the current version is not a pre-release such as a git commit hash
     if (
-      semver.prerelease(currentVersion) === null &&
-      semver.valid(currentVersion)
+      semver.valid(currentVersion) && semver.prerelease(currentVersion) === null
     ) {
       // Check if the current version is less than the latest version
       if (semver.gt(latestVersion, currentVersion)) {
