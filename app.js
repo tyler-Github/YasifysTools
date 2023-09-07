@@ -66,6 +66,8 @@ mongoose
     console.error("Error connecting to MongoDB:", error);
   });
 
+// app.set("trust proxy", true);
+app.set("trust proxy", "127.0.0.1"); // specify a single subnet
 // Set up the view engine
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -239,11 +241,18 @@ server.listen(app_port, async () => {
     vLog(`Current version: ${currentVersion}`);
     vLog(`Latest version: ${latestVersion}`);
 
-    // Check if the current version is less than the latest version
-    if (semver.gt(latestVersion, currentVersion)) {
-      console.log(`Update available: ${currentVersion} -> ${latestVersion}`);
+    // Only do that if the current version is not a pre-release such as a git commit hash
+    if (semver.prerelease(currentVersion) === null) {
+      // Check if the current version is less than the latest version
+      if (semver.gt(latestVersion, currentVersion)) {
+        console.log(`Update available: ${currentVersion} -> ${latestVersion}`);
+      } else {
+        console.log("Yasifys Tools is up to date");
+      }
     } else {
-      console.log("Yasifys Tools is up to date");
+      console.log(
+        `Current pre-release: ${currentVersion}, not checking for updates`
+      );
     }
   } catch (err) {
     // Return if there is an error
