@@ -245,19 +245,25 @@ server.listen(app_port, async () => {
     vLog(`Current version: ${currentVersion}`);
     vLog(`Latest version: ${latestVersion}`);
 
-    // Only do that if the current version is not a pre-release such as a git commit hash
-    if (
-      semver.valid(currentVersion) && semver.prerelease(currentVersion) === null
-    ) {
-      // Check if the current version is less than the latest version
-      if (semver.gt(latestVersion, currentVersion)) {
-        console.log(`Update available: ${currentVersion} -> ${latestVersion}`);
+    if (semver.valid(currentVersion)) {
+      // Only do that if the current version is not a pre-release such as a git commit hash
+      if (semver.prerelease(currentVersion) === null) {
+        // Check if the current version is less than the latest version
+        if (semver.gt(latestVersion, currentVersion)) {
+          console.log(
+            `Update available: ${currentVersion} -> ${latestVersion}`
+          );
+        } else {
+          console.log("Yasifys Tools is up to date");
+        }
       } else {
-        console.log("Yasifys Tools is up to date");
+        console.log(
+          `Current pre-release: ${currentVersion}, not checking for updates`
+        );
       }
     } else {
       console.log(
-        `Current pre-release: ${currentVersion}, not checking for updates`
+        `Invalid version format: ${currentVersion}. Unable to check for updates.`
       );
     }
   } catch (err) {
