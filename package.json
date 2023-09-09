@@ -20,7 +20,7 @@
     "express-rate-limit": "^6.8.1",
     "helmet": "^7.0.0",
     "mongoose": "^7.5.0",
-    "node-fetch": "^2.6.12",
+    "node-fetch": "^2.6.13",
     "sanitize-filename": "^1.6.3",
     "semver": "^7.5.1",
     "socket.io": "^4.7.1",
