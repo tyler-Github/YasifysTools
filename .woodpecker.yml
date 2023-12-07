@@ -1,3 +1,9 @@
+when:
+  - event: [pull_request, tag]
+  - event: push
+    branch:
+      - ${CI_REPO_DEFAULT_BRANCH}
+
 variables:
   - &node_image "node:18-alpine"
   - &buildx_image "woodpeckerci/plugin-docker-buildx"
@@ -11,7 +17,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
     ports: ["27017"]
 
-pipeline:
+steps:
   - name: Install Dependencies
     image: *node_image
     commands:
@@ -78,6 +84,3 @@ pipeline:
       tag: pull_${CI_COMMIT_PULL_REQUEST}
     when:
       event: pull_request
-
-branches: [main]
-ignore_paths: [README.md, LICENSE, .github, .gitignore]
