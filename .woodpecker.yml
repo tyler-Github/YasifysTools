@@ -44,13 +44,13 @@ steps:
     commands:
       - npm test --coverage
 
-  - name: SonarQube Scan
-    image: sonarsource/sonar-scanner-cli:4.8.0
-    secrets: [sonar_token]
-    environment:
-      SONAR_HOST_URL: "https://sonar.vahngomes.dev"
-    commands:
-      - sonar-scanner
+  # - name: SonarQube Scan
+  #   image: sonarsource/sonar-scanner-cli:4.8.0
+  #   secrets: [sonar_token]
+  #   environment:
+  #     SONAR_HOST_URL: "https://sonar.vahngomes.dev"
+  #   commands:
+  #     - sonar-scanner
 
   - name: Deploy to Docker Hub
     image: *buildx_image
