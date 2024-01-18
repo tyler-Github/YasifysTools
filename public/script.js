@@ -1,17 +1,17 @@
-const container = document.querySelector(".containers"),
-mainVideo = container.querySelector("video"),
-videoTimeline = container.querySelector(".video-timeline"),
-progressBar = container.querySelector(".progress-bar"),
-volumeBtn = container.querySelector(".volume i"),
-volumeSlider = container.querySelector(".left input");
-currentVidTime = container.querySelector(".current-time"),
-videoDuration = container.querySelector(".video-duration"),
-skipBackward = container.querySelector(".skip-backward i"),
-skipForward = container.querySelector(".skip-forward i"),
-playPauseBtn = container.querySelector(".play-pause i"),
-speedOptions = container.querySelector(".speed-options"),
-pipBtn = container.querySelector(".pic-in-pic span"),
-fullScreenBtn = container.querySelector(".fullscreen i");
+const container = document.querySelector(".containers")
+const mainVideo = container.querySelector("video")
+const videoTimeline = container.querySelector(".video-timeline")
+const progressBar = container.querySelector(".progress-bar")
+const volumeBtn = container.querySelector(".volume i")
+const volumeSlider = container.querySelector(".left input")
+const currentVidTime = container.querySelector(".current-time")
+const videoDuration = container.querySelector(".video-duration")
+const skipBackward = container.querySelector(".skip-backward i")
+const skipForward = container.querySelector(".skip-forward i")
+const playPauseBtn = container.querySelector(".play-pause i")
+const speedOptions = container.querySelector(".speed-options")
+const pipBtn = container.querySelector(".pic-in-pic span")
+const fullScreenBtn = container.querySelector(".fullscreen i")
 let timer;
 
 const hideControls = () => {
