@@ -9,7 +9,6 @@ const videoDuration = container.querySelector(".video-duration")
 const skipBackward = container.querySelector(".skip-backward i")
 const skipForward = container.querySelector(".skip-forward i")
 const playPauseBtn = container.querySelector(".play-pause i")
-const speedOptions = container.querySelector(".speed-options")
 const pipBtn = container.querySelector(".pic-in-pic span")
 const fullScreenBtn = container.querySelector(".fullscreen i")
 let timer;
