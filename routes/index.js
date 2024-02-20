@@ -17,6 +17,9 @@ router.get('/download', handlers.downloadVideo);
 // Route for rendering the player page
 router.get('/player', handlers.renderPlayerPage);
 
+// Route for rendering the embed page
+router.get('/embed', handlers.renderEmbedPage);
+
 // Route for rendering the settings page
 router.get('/settings', handlers.renderSettingsPage);
 
