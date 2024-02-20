@@ -86,7 +86,7 @@ steps:
       event: pull_request
 
   - name: Deploy to CapRover
-    image: insidiousfiddler/caprover-deploy
+    image: vmgware/woodpecker-plugin-caprover-deploy
     settings:
       server:
         from_secret: caprover_server
