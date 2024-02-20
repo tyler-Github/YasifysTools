@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { getVersion } = require("../helpers/helpers");
 
-// Load environment variables
+// Load environment variables.
 require("dotenv").config();
 
 // Set up the Matomo and Google Analytics variables
