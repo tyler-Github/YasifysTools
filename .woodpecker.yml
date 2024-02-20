@@ -84,3 +84,17 @@ steps:
       tag: pull_${CI_COMMIT_PULL_REQUEST}
     when:
       event: pull_request
+
+  - name: Deploy to CapRover
+    image: insidiousfiddler/caprover-deploy
+    settings:
+      server:
+        from_secret: caprover_server
+      app: yasifys
+      token:
+        from_secret: caprover_token
+      branch: main
+      image: insidiousfiddler/yasifystools:latest
+    when:
+      event: [push, tag]
+      branch: main
