@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { getVersion } = require("../helpers/helpers");
 
-// Load environment variables.
+// Load environment variables
 require("dotenv").config();
 
 // Set up the Matomo and Google Analytics variables
@@ -120,12 +120,6 @@ exports.downloadVideo = (req, res) => {
 exports.renderEmbedPage = (req, res) => {
   const { url, title } = req.query;
 
-  // If the URL or title is missing, redirect to the home page
-  if (!url || !title) {
-    res.redirect("/");
-    return;
-  }
-
   // Make sure the URL is a relative path (no leading slash) and contains no directory traversal
   if (url.startsWith("/") || url.startsWith("..") || url.includes("..")) {
     res.status(400).send("Invalid URL");
@@ -165,7 +159,7 @@ exports.renderPlayerPage = (req, res) => {
   const filePath = path.join("/downloads", url);
 
   // Set the embed path
-  const EmbedPath = path.join("/embed", url);
+  const EmbedPath = `https://yasifys.vmgware.dev/embed?url=${url}&title=${title}`;
 
   // Render the player page
   res.render("player", {
