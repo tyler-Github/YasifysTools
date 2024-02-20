@@ -164,9 +164,13 @@ exports.renderPlayerPage = (req, res) => {
   // Set the file path
   const filePath = path.join("/downloads", url);
 
+  // Set the embed path
+  const EmbedPath = path.join("/embed", url);
+
   // Render the player page
   res.render("player", {
     url: filePath,
+    embed: EmbedPath,
     title,
     version: getVersion(),
     matomo: MATOMO,
