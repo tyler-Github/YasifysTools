@@ -24,7 +24,7 @@
   <meta name="twitter:image:alt" content="Yasifys logo" />
 
   <meta property="og:video:type" content="text/html">
-  <meta property="og:video:url" content="<%= embed %>">
+  <meta property="og:video:url" content="" id="ogVideoUrl">
   <meta property="og:video:height" content="720">
   <meta property="og:video:width" content="1280">
   <meta property="og:type" content="video.other">
@@ -175,6 +175,19 @@
   </div>
 
   <script src="script.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Get the current page URL
+      var currentPageUrl = window.location.href;
+  
+      // Replace "Player" with "embed" in the URL
+      var modifiedUrl = currentPageUrl.replace("player", "embed");
+  
+      // Update the og:video:url meta tag with the modified URL
+      document.getElementById("ogVideoUrl").setAttribute("content", modifiedUrl);
+    });
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
