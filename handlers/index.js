@@ -117,6 +117,35 @@ exports.downloadVideo = (req, res) => {
 };
 
 // Handler function for rendering the player page
+exports.renderEmbedPage = (req, res) => {
+  const { url, title } = req.query;
+
+  // If the URL or title is missing, redirect to the home page
+  if (!url || !title) {
+    res.redirect("/");
+    return;
+  }
+
+  // Make sure the URL is a relative path (no leading slash) and contains no directory traversal
+  if (url.startsWith("/") || url.startsWith("..") || url.includes("..")) {
+    res.status(400).send("Invalid URL");
+    return;
+  }
+
+  // Set the file path
+  const filePath = path.join("/downloads", url);
+
+  // Render the player page
+  res.render("embed", {
+    url: filePath,
+    title,
+    version: getVersion(),
+    matomo: MATOMO,
+    gaTrackingId: GA_TRACKING_ID,
+  });
+};
+
+// Handler function for rendering the player page
 exports.renderPlayerPage = (req, res) => {
   const { url, title } = req.query;
 
