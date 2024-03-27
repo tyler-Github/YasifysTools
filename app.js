@@ -155,8 +155,11 @@ io.on("connection", function (socket) {
           FinishedName,
         });
 
-        // Delete the file after 5 minutes
-        const deleteTime = 20 * 60 * 1000; // 20 minutes in milliseconds
+        // Calculate delete time (video length + 10 minutes)
+        const deleteTime =
+          (info.videoDetails.lengthSeconds + 10 * 60) * 1000; // in milliseconds
+
+        // Delete the file after deleteTime
         setTimeout(() => {
           fs.unlink(filename, (err) => {
             if (err) {
