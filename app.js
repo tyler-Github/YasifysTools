@@ -155,9 +155,14 @@ io.on("connection", function (socket) {
           FinishedName,
         });
 
-        // Calculate delete time (video length + 10 minutes)
-        const deleteTime =
-          (info.videoDetails.lengthSeconds + 10 * 60) * 1000; // in milliseconds
+    
+      const videoLengthSeconds = parseInt(info.videoDetails.lengthSeconds);
+      const maxDeleteTime = Math.pow(2, 31) - 1; // Maximum value for a 32-bit signed integer
+     let deleteTime = (videoLengthSeconds + 10 * 60) * 1000; // in milliseconds
+     if (deleteTime > maxDeleteTime) {
+         console.warn("Delete time exceeds maximum value, setting to maximum value.");
+         deleteTime = maxDeleteTime;
+     }
 
         // Delete the file after deleteTime
         setTimeout(() => {
