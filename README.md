@@ -6,7 +6,6 @@
 [![Build Status][status-badge]][status-url]
 [![MIT License][license-badge]][license-url]
 [![Docker Pulls][docker-pulls-badge]][docker-pulls-url]
-[![Quality Gate Status][sonar-badge]][sonar-url]
 
 YouTube Downloader is a versatile tool that allows users to easily download YouTube videos in various formats. With this open-source project, you can quickly extract and save videos from YouTube by providing the video URL. The downloader supports popular video formats like MP4 and provides a simple and intuitive user interface.
 
@@ -67,5 +66,3 @@ docker pull insidiousfiddler/yasifystools && docker run -it --rm -p 0:3000 insid
 [docker-pulls-badge]: https://img.shields.io/docker/pulls/insidiousfiddler/yasifystools.svg
 [license-url]: LICENSE
 [license-badge]: https://img.shields.io/github/license/tyler-Github/YasifysTools.svg
-[sonar-url]: https://sonar.vahngomes.dev/dashboard?id=yasifys-tools
-[sonar-badge]: https://sonar.vahngomes.dev/api/project_badges/measure?project=yasifys-tools&metric=alert_status
