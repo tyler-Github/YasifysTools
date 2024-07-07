@@ -13,7 +13,7 @@
   "author": "Tyler Github",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^18.17.2",
+    "@types/node": "^18.19.10",
     "@distube/ytdl-core": "^4.13.3",
     "dotenv": "^16.3.2",
     "ejs": "^3.1.9",
