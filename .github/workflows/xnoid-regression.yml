@@ -1,0 +1,58 @@
+name: XnoidRegression
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  regression-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests with profiling
+        id: run_tests
+        run: |
+          START_TIME=$(date +%s%N)
+          TEST_OUTPUT=$(npm test || true)
+          END_TIME=$(date +%s%N)
+          DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
+          MEMORY_USAGE=$(node -e "console.log(process.memoryUsage().heapUsed)")
+          echo "output<<EOF" >> $GITHUB_ENV
+          echo "$TEST_OUTPUT" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+          echo "duration=$DURATION" >> $GITHUB_ENV
+          echo "memory=$MEMORY_USAGE" >> $GITHUB_ENV
+
+      - name: Check for regressions
+        id: check_regression
+        run: node .github/scripts/check-regression.js
+        env:
+          TEST_OUTPUT: ${{ env.output }}
+          TEST_DURATION: ${{ env.duration }}
+          TEST_MEMORY: ${{ env.memory }}
+
+      - name: Retry failed tests (if necessary)
+        if: failure()
+        run: node .github/scripts/retry-tests.js
+
+      - name: Post regression report to PR
+        if: failure()
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: ${{ env.REGRESSION_REPORT }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
